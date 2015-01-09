@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="about">Über</string>
+    <string name="sensor">Sensor</string>
+    <string name="navigation_drawer_open">Navigation öffnen</string>
+    <string name="navigation_drawer_close">Navigation schließen</string>
+    <string name="app_name">SensorMax</string>
+    <string name="speed">Geschwindigkeit in m/s</string>
+    <string name="longitude">Längengrad in °</string>
+    <string name="latitude">Breitengrad in °</string>
+    <string name="time_in_ms">Zeit in ms</string>
+    <string name="frequency">Frequenz in Hz</string>
+    <string name="decible">Dezibel</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="settings">Einstellungen</string>
+    <string name="save_config_dialog_title">Konfiguration speichern</string>
+    <string name="save_config_dialog_content">Bitte geben Sie den Namen der zu speichernden Konfiguration an</string>
+    <string name="save_measurement_dialog_title">Messung speichern</string>
+    <string name="save_measurement_dialog_content">Bitte geben Sie den Namen der zu speichernden Messung an</string>
+    <string name="info_save_action_successful">Speichern erfolgreich</string>
+    <string name="info_save_action_unsuccessful">Speichern fehlgeschlagen</string>
+    <string name="info_file_already_existing">Datei existiert bereits</string>
+    <string name="request_stop_measuring_first">Bitte erst Messung stoppen</string>
+    <string name="gps_settings_alert_title">GPS ist deaktiviert!</string>
+    <string name="gps_settings_alert_content">GPS ist deaktiviert.&lt;br /&gt;Wollen Sie die Einstellungen öffnen?</string>
+    <string name="start">Start</string>
+    <string name="pause">Pause</string>
+    <string name="stop">Stop</string>
+    <string name="highlight">Markieren</string>
+    <string name="continue_measuring">Weiter</string>
+    <string name="calibrate">Kalibrieren</string>
+    <string name="save">Speichern</string>
+    <string name="expand">Ausklappen</string>
+    <string name="collapse">Einklappen</string>
+    <string name="measuring_interval_standard">20</string>
+    <string name="measuring_interval_hint">Messintervall in ms</string>
+    <string name="measuring_interval">Messintervall</string>
+    <string name="measuring_time_toggle_on">Messzeit an</string>
+    <string name="measuring_time_toggle_off">Messzeit aus</string>
+    <string name="measuring_time_hint">Messzeit in ms</string>
+    <string name="trigger_toggle_on">Trigger an</string>
+    <string name="trigger_toggle_off">Trigger aus</string>
+    <string name="sensor_accelerometer_name">Beschleunigungssensor</string>
+    <string name="sensor_ambient_temperature_name">Temperatursensor</string>
+    <string name="sensor_gravity_name">Gravitationssensor</string>
+    <string name="sensor_gyroscope_name">Gyroskop</string>
+    <string name="sensor_light_name">Beleuchtungssensor</string>
+    <string name="sensor_linear_acceleration_name">Lin. Beschleunigungssensor</string>
+    <string name="sensor_magnetic_field_name">Magnetfeldsensor</string>
+    <string name="sensor_pressure_name">Drucksensor</string>
+    <string name="sensor_proximity_name">Näherungssensor</string>
+    <string name="sensor_relative_humidity_name">Feuchtigkeitssensor</string>
+    <string name="audio_analysis">Audioanalyse</string>
+    <string name="gps_tracking">GPS-Ortung</string>
+    <string name="livestream">Livestream</string>
+    <string name="satellite_count">Anzahl verbundener Satelliten</string>
+    <string name="think_gear">Think Gear</string>
+    <string name="channel_short">CH</string>
+    <string name="heart_rate">Puls</string>
+    <string name="error_think_gear_not_found">Thinkgear nicht gefunden!</string>
+    <string name="info_think_gear_connecting">Verbinde mit ThinkGear...</string>
+    <string name="info_think_gear_disconnected">Verbindung getrennt</string>
+    <string name="info_think_gear_battery_low">Batterie des TG - Gerätes niedrig!</string>
+    <string name="request_think_gear_pair">Bitte erst mit Gerät paaren!</string>
+    <string name="info_bluetooth_unavailable">Kein Bluetooth verfügbar</string>
+    <string name="interval">Intervall</string>
+    <string name="interval_in_ms">Intervall in ms</string>
+    <string name="start_frequency_in_hz">Startfrequenz in Hz</string>
+    <string name="end_frequency_in_hz">Endfrequenz in Hz</string>
+    <string name="frequency_interval_setting">Frequenzintervallangabe</string>
+    <string name="frequency_generator">Frequenzgenerator</string>
+    <string name="duration_in_ms">Dauer in ms</string>
+    <string name="info_think_gear_poor_signal">Schwaches Signal!</string>
+    <string name="load">Laden</string>
+    <string name="use_wifi_only">Nur Wifi verwenden</string>
+    <string name="pause_measurement_on_minimize">Messung pausieren bei Minimierung</string>
+    <string name="use_service">Nutze Service (Verhindert Beendigung der App)</string>
+    <string name="device_id">Geräte-ID</string>
+    <string name="overview">Übersicht</string>
+    <string name="close">Schließen</string>
+    <string name="info_press_long_to_reset_calibration">Zum Zurücksetzten lange drücken</string>
+    <string name="group">Gruppe</string>
+    <string name="no_group_selected">Keine Gruppe</string>
+    <string name="home">Startseite</string>
+    <string name="open">Öffnen</string>
+    <string name="sensor_overview">Sensoren</string>
+    <string name="measurement">Messung</string>
+    <string name="share_measurement">Messung teilen</string>
+    <string name="interrupt_measuring_on_minimize">Unterbreche Messung bei Minimierung der App</string>
+    <string name="is_network_locating_allowed">Nutze das Netzwerk zur Lokalisierung bei der GPS - Messung</string>
+    <string name="show_think_gear">Zeige die Seite für das ThinkGear - Zubehör</string>
+    <string name="max_graph_view_show_time">Zeit, die der Graph anzeigen soll</string>
+    <string name="is_screen_rotation_blocked">Blockiere Bildschirmrotation</string>
+    <string name="keep_screen_on_while_measuring">Lasse Bildschirm während der Messung an</string>
+    <string name="show_summary_at_end">Zeige Messungsübersicht am Ende</string>
+    <string name="offline">Offline</string>
+    <string name="online">Online</string>
+    <string name="ok">OK</string>
+    <string name="data_successfully_sended">Daten wurden erfolgreich versandt.\r&lt;br /&gt;Vielen Dank!</string>
+    <string name="data_not_sent">Daten konnten nicht versandt werden.</string>
+    <string name="send">Senden</string>
+    <string name="http">http://...</string>
+    <string name="address">Adresse</string>
+    <string name="type">Typ</string>
+    <string name="name">Name</string>
+    <string name="vendor">Hersteller</string>
+    <string name="version">Version</string>
+    <string name="power">Verbrauch</string>
+    <string name="resolution">Auflösung</string>
+    <string name="range">Skala</string>
+    <string name="x_in_ms2">x in m/s²</string>
+    <string name="y_in_ms2">y in m/s²</string>
+    <string name="z_in_ms2">z in m/s²</string>
+    <string name="ms2">m/s²</string>
+    <string name="t_in_c">T in °C</string>
+    <string name="c">°C</string>
+    <string name="x_in_rads">x in rad/s</string>
+    <string name="y_in_rads">y in rad/s</string>
+    <string name="z_in_rads">z in rad/s</string>
+    <string name="rads">rad/s</string>
+    <string name="e_in_lux">E in lux</string>
+    <string name="lux">lux</string>
+    <string name="x_in_mt">x in µT</string>
+    <string name="y_in_mt">y in µT</string>
+    <string name="z_in_mt">z in µT</string>
+    <string name="mt">µT</string>
+    <string name="p_in_hpa">P in hPa</string>
+    <string name="hpa">hPa</string>
+    <string name="s_in_cm">s in cm</string>
+    <string name="cm">cm</string>
+    <string name="phi_in_procent">Ï† in %</string>
+    <string name="procent">%</string>
+    <string name="infotext_acceleration">
+        Misst die Beschleunigung in m/s²  welche auf jede der drei 
+        physikalischen Achsen (x, y, z) wirkt. Es sollte beachtet werden, 
+        dass diese Werte durch die Gravitation beeinflusst sind.&lt;br /&gt;
+        Deshalb sollte, wenn das Handy flach auf einem Tisch liegt, die Werte 
+        der Gravitation angezeigt werden. (y-Achse: 9.81 m/s²)&lt;br /&gt;
+        Die x-Achse ist relativ zu der linken und rechten Seite des Smartphones.&lt;br /&gt;
+        Die y-Achse ist relativ zu der oberen und unteren Seite des Smartphones.&lt;br /&gt;
+        Die z-Achse ist relativ zur Vorder- und Rückseite des Smartphones.</string>
+    <string name="infotext_ambient_temperature">
+        Misst die Umgebungstemperatur im Raum in °C.</string>
+    <string name="infotext_gravity">
+        Misst die Gravitationskraft in m/s² , welche auf jede der drei 
+        physikalischen Achsen (x, y, z) wirkt.&lt;br /&gt;
+        Wenn das Gerät ruhig auf einem Tisch liegt, sollten die Werte mit 
+        denen des Beschleunigungsensors übereinstimmen.&lt;br /&gt;
+        Die x-Achse ist relativ zu der linken und rechten Seite des Smartphones.&lt;br /&gt;
+        Die y-Achse ist relativ zu der oberen und unteren Seite des Smartphones.&lt;br /&gt;
+        Die z-Achse ist relativ zur Vorder- und Rückseite des Smartphones.</string>
+    <string name="infotext_gyroscope">
+        Misst die Rotationsgeschwindigkeit in rad/s um jede der drei 
+        physikalischen Achsen (x, y, z). &lt;br /&gt;
+        Wenn das Gerät ruhig auf einem Tisch liegt, sollten alle Werte den Wert 
+        0 rad/s annehmen.&lt;br /&gt;
+        Die x-Achse ist relativ zu der linken und rechten Seite des Smartphones.&lt;br /&gt;
+        Die y-Achse ist relativ zu der oberen und unteren Seite des Smartphones.&lt;br /&gt;
+        Die z-Achse ist relativ zur Vorder- und Rückseite des Smartphones.</string>
+	<string name="infotext_light">
+        Misst die Intensität des Lichtes, welche auf das Gerät trifft in lux.&lt;br /&gt;
+        Dieser Sensor befindet sich normalerweise neben der Hörmuschel bzw. 
+        neben der Frontkamera.</string>
+	<string name="infotext_linear_acceleration">
+        Misst die Beschleunigungskraft in m/s²  welche auf jede der drei 
+        physikalischen Achsen (x, y, z) wirkt.&lt;br /&gt;
+        Hierbei wird die Beschleunigungskraft angezeigt, welche nicht durch die 
+        Gravitation beeinflusst ist.
+        Wenn das Gerät ruhig auf einem Tisch liegt, so sollten alle Werte den 
+        Wert 0 m/s² annehmen.&lt;br /&gt;
+        Wird das Gerät bewegt, so wird ausschließlich die Beschleunigungskraft 
+        angezeigt, die auf das Gerät wirkt.&lt;br /&gt;
+        Die x-Achse ist relativ zu der linken und rechten Seite des Smartphones.&lt;br /&gt;
+        Die y-Achse ist relativ zu der oberen und unteren Seite des Smartphones.&lt;br /&gt;
+        Die z-Achse ist relativ zur Vorder- und Rückseite des Smartphones.</string>
+    <string name="infotext_magnetic_field">
+        Misst die Umgebungsmagnetstärke in µT, welche auf jede der drei 
+        physikalischen Achsen (x, y, z) wirkt.&lt;br /&gt;
+        Befindet sich kein Magnet in der Nähe, so entsprechen die Werte denen des 
+        Erdmagnetfeldes.&lt;br /&gt;
+        Die x-Achse ist relativ zu der linken und rechten Seite des Smartphones.&lt;br /&gt;
+        Die y-Achse ist relativ zu der oberen und unteren Seite des Smartphones.&lt;br /&gt;
+        Die z-Achse ist relativ zur Vorder- und Rückseite des Smartphones.</string>
+    <string name="infotext_pressure">
+        Misst den Umgebungsluftdruck in hPa.</string>
+    <string name="infotext_proximity">
+        Misst die Näherung eines Objektes in cm relativ zum Bildschirm des Gerätes. 
+        Dieser Wert ist meistens binär, d.h. dass entweder 0 cm, oder das Maximum 
+        des Messbereiches angezeigt wird.&lt;br /&gt;
+        Dieser Sensor befindet sich meistens in der Nähe des Beleuchtungssensors, 
+        neben der Ohrmuschel.&lt;br /&gt;</string>
+    <string name="infotext_relative_humidity">
+        Misst die relative Umgebungsfeuchtigkeit in %.&lt;br /&gt;</string>
+    <string name="infotext_gps">
+        Gibt die aktuelle Position durch Angabe des Längen- und Breitengrades an.&lt;br /&gt; 
+        Wenn sich der Sensor in Bewegung befindet, wird die Geschwindigkeit in m/s 
+        angegeben.&lt;br /&gt;
+        Die Ortung erfolgt entweder durch den GPS - Sensor, oder falls in den Einstellungen
+        angegeben, auch durch das Netzwerk.&lt;br /&gt;
+        Befindet sich das Gerät in Bewegung wird üblicherweise der GPS - Sensor 
+        verwendet.</string>
+    <string name="infotext_audio_analysis">
+        Misst die Lautstärke und dominanteste Frequenz, welche durch das Mikrofon
+        aufgenommen wird.&lt;br /&gt;
+        Die erhaltenen Messwerte sind nicht sehr genau und variieren zum Teil 
+        von Gerät zu Gerät. Es eignet sich jedoch gut, um die Lautstärke mit dem
+        selben Smartphone an mehreren Orten zu vergleichen.&lt;br /&gt;
+        Da das Mikrofon unter Android hauptsächlich für die Telefoniefunktion 
+        konzipiert wurde, findet bei dauerhaften, konstanten Frequenzen die 
+        Geräuschunterdrückung statt. Dadurch wird diese Frequenz schlicht nicht 
+        mehr aufgezeichnet.&lt;br /&gt;
+        Die Kalibrierung sollte in einem störgeräuschfreiem Raum erfolgen.&lt;br /&gt;
+        Der Lautstärkepegel in einem solchen Raum liegt in etwa bei 30 Dezibel</string>
+    <string name="infotext_think_gear">
+        Das ThinkGear MindWave™ Headset dient zum Aufzeichnen von EEG - Messwerten.&lt;br /&gt;
+        &lt;br /&gt;
+        &lt;a href="http://store.neurosky.com/products/brainwave-starter-kit"&gt;Zur 
+        Herstellerseite&lt;/a&gt;
+    	&lt;br /&gt;
+    </string>
+	<string name="home_info">
+	    Vielen Dank, dass Du SensorMax auf deinem Smartphone installiert hast!&lt;br /&gt;
+	    Dein Smartphone ist nun ein leistungsfähiges Messgerät :)&lt;br /&gt;
+	    Um Anregungen für physikalische Experimente zu erhalten, kannst Du gerne 
+	    unseren &lt;a href="http://www.sensormax.blogspot.de"&gt;Experimentierblog&lt;/a&gt;
+	    besuchen.&lt;br /&gt;
+	</string>
+	<string name="about_info">
+	    Diese App wurde von Leonardo Hübscher programmiert und entstand in der 
+	    Zusammenarbeit mit Robert Schurmann und Niels Bracher im Zuge eines Jugend Forscht  
+	    Projektes.&lt;br /&gt;
+	    Für die Darstellung des Graphen wird die &lt;a href="http://www.android-graphview.org/"
+	    &gt;GraphView&lt;/a&gt; - Bibliothek verwendet.
+	    &lt;br /&gt;&lt;br /&gt;
+	    Für mehr Informationen, Experimentiervorlagen, Tipps und Tricks besuche uns auf&lt;br /&gt;
+	    &lt;a href="http://www.sensormax.blogspot.de"&gt;http://www.sensormax.blogspot.de&lt;/a&gt;
+	</string>
+    
+</resources>

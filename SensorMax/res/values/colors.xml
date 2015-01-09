@@ -1,0 +1,11 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    
+	<color name="series1">#D81313</color> 
+	<color name="series2">#1A5E0B</color> 
+	<color name="series3">#1C57D4</color> 
+	<color name="actionbar">#4285F4</color>
+	<color name="actionbar_dark">#3367D6</color>
+	<color name="actionbar_text">#FFFFFF</color>
+	<color name="home_text_background">#80FFFFFF</color>
+	
+</resources>

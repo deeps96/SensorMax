@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.deeps.sensormax.NavigationActivity" >
+
+    <item
+        android:id="@+id/shareMeasurementAction"
+        android:icon="@drawable/ic_action_share"
+        app:showAsAction="always">
+    </item>
+    <item
+        android:id="@+id/infoAction"
+        android:icon="@drawable/ic_action_about"
+        app:showAsAction="always">
+    </item>
+
+</menu>
