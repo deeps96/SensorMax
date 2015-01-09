@@ -3,6 +3,7 @@ package com.deeps.sensormax.model;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -33,7 +34,7 @@ public class MyConfig {
 
 	private boolean isFirstAppStart, interruptMeasuringOnMinimize,
 			isNetworkLocatingAllowed, showThinkGear, isScreenRotationBlocked,
-			keepScreenONWhileMeasuring, showSummaryAtEnd,
+			keepScreenONWhileMeasuring, showSummaryAtEnd, isBluetoothAvailable,
 			useAutoScaling = true, showWholeGraphAtEnd = true;
 	private int maxGraphViewShowTime, bufferSizeLocalMeasuring = 180000,
 			defaultMeasuringInterval = 20,
@@ -89,7 +90,9 @@ public class MyConfig {
 		showSummaryAtEnd = settings.getBoolean("showSummaryAtEnd", true);
 		maxGraphViewShowTime = settings.getInt("maxGraphViewShowTime", 4000);
 		liveStreamURL = settings.getString("liveStreamURL", null);
-
+		isBluetoothAvailable = settings.getBoolean(
+			"isBluetoothAvailable",
+			false);
 		// apply settings
 		dataHandlerActivity.blockScreenRotation(isScreenRotationBlocked);
 	}
@@ -158,10 +161,15 @@ public class MyConfig {
 					editor.putBoolean(s.getName(), false);
 				}
 			}
-			editor.commit();
 		} else {
 			Log.e(TAG, "SensorManager not found");
 		}
+
+		if (BluetoothAdapter.getDefaultAdapter() != null) {
+			isBluetoothAvailable = true;
+			editor.putBoolean("isBluetoothAvailable", true);
+		}
+		editor.commit();
 	}
 
 	// Getter & Setter
@@ -300,6 +308,10 @@ public class MyConfig {
 	public boolean isLiveStreamWellConfigurated() {
 		return liveStreamURL != null && liveStreamURL.startsWith("http")
 				&& deviceID != null && deviceID.length() > 0;
+	}
+
+	public boolean isBluetoothAvailable() {
+		return isBluetoothAvailable;
 	}
 
 }

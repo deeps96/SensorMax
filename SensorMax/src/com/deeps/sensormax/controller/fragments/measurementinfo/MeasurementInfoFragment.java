@@ -77,8 +77,8 @@ public class MeasurementInfoFragment extends SuperFragment {
 	private void initRangeTextView() {
 		TextView rangeTextView = (TextView) view
 				.findViewById(R.id.rangeTextView);
-		rangeTextView.setText(minRange + " " + unit + "  -  " + maxRange + " "
-				+ unit);
+		rangeTextView.setText(minRange + " " + unit + "  bis  " + maxRange
+				+ " " + unit);
 	}
 
 	private void initResolutionTextView() {

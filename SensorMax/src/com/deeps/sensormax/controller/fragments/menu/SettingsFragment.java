@@ -172,15 +172,19 @@ public class SettingsFragment extends SuperFragment {
 	private void initShowThinkGearCheckBox() {
 		CheckBox showThinkGearCheckBox = (CheckBox) view
 				.findViewById(R.id.showThinkGearCheckBox);
-		showThinkGearCheckBox.setChecked(myConfig.isShowThinkGear());
-		showThinkGearCheckBox
-				.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-					@Override
-					public void onCheckedChanged(CompoundButton buttonView,
-							boolean isChecked) {
-						myConfig.setShowThinkGear(isChecked);
-					}
-				});
+		if (myConfig.isBluetoothAvailable()) {
+			showThinkGearCheckBox.setChecked(myConfig.isShowThinkGear());
+			showThinkGearCheckBox
+					.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+						@Override
+						public void onCheckedChanged(CompoundButton buttonView,
+								boolean isChecked) {
+							myConfig.setShowThinkGear(isChecked);
+						}
+					});
+		} else {
+			showThinkGearCheckBox.setEnabled(false);
+		}
 	}
 
 	private void initIsScreenRotationBlockedCheckBox() {

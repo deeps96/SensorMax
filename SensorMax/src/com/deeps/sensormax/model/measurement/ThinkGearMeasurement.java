@@ -32,14 +32,8 @@ public class ThinkGearMeasurement extends Measurement {
 		super(dataHandlerActivity);
 		initialise();
 
-		bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-		if (bluetoothAdapter == null) {
-			Toast.makeText(
-				dataHandlerActivity,
-				dataHandlerActivity
-						.getString(R.string.info_bluetooth_unavailable),
-				Toast.LENGTH_LONG).show();
-		} else {
+		if (dataHandlerActivity.getMyConfig().isBluetoothAvailable()) {
+			bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 			isBluetoothEnabledOnStart = bluetoothAdapter.isEnabled();
 			tgDevice = new TGDevice(bluetoothAdapter, new ThinkGearHandler());
 		}
