@@ -132,9 +132,9 @@
     <string name="phi_in_procent">Ï† in %</string>
     <string name="procent">%</string>
     <string name="infotext_acceleration">
-        Misst die Beschleunigung in m/s²  welche auf jede der drei 
-        physikalischen Achsen (x, y, z) wirkt. Es sollte beachtet werden, 
-        dass diese Werte durch die Gravitation beeinflusst sind.&lt;br /&gt;
+        Misst die Beschleunigung in m/s^2 , welche auf jede der drei 
+        physikalischen Achsen (x, y, z) wirkt. (Einschließlich der 
+        Fallbeschleunigung)&lt;br /&gt;
         Deshalb sollte, wenn das Handy flach auf einem Tisch liegt, die Werte 
         der Gravitation angezeigt werden. (y-Achse: 9.81 m/s²)&lt;br /&gt;
         Die x-Achse ist relativ zu der linken und rechten Seite des Smartphones.&lt;br /&gt;
@@ -143,7 +143,7 @@
     <string name="infotext_ambient_temperature">
         Misst die Umgebungstemperatur im Raum in °C.</string>
     <string name="infotext_gravity">
-        Misst die Gravitationskraft in m/s² , welche auf jede der drei 
+        Misst die Fallbeschleunigung in m/s^2 , welche auf jede der drei 
         physikalischen Achsen (x, y, z) wirkt.&lt;br /&gt;
         Wenn das Gerät ruhig auf einem Tisch liegt, sollten die Werte mit 
         denen des Beschleunigungsensors übereinstimmen.&lt;br /&gt;
@@ -159,14 +159,12 @@
         Die y-Achse ist relativ zu der oberen und unteren Seite des Smartphones.&lt;br /&gt;
         Die z-Achse ist relativ zur Vorder- und Rückseite des Smartphones.</string>
 	<string name="infotext_light">
-        Misst die Intensität des Lichtes, welche auf das Gerät trifft in lux.&lt;br /&gt;
+        Misst die Umgebungslichtstärke in lux.&lt;br /&gt;
         Dieser Sensor befindet sich normalerweise neben der Hörmuschel bzw. 
         neben der Frontkamera.</string>
 	<string name="infotext_linear_acceleration">
-        Misst die Beschleunigungskraft in m/s²  welche auf jede der drei 
-        physikalischen Achsen (x, y, z) wirkt.&lt;br /&gt;
-        Hierbei wird die Beschleunigungskraft angezeigt, welche nicht durch die 
-        Gravitation beeinflusst ist.
+        Misst die Beschleunigung in m/s^2 , welche auf jede der drei 
+        physikalischen Achsen (x, y, z) wirkt. (ohne der Fallbeschleunigung)&lt;br /&gt;
         Wenn das Gerät ruhig auf einem Tisch liegt, so sollten alle Werte den 
         Wert 0 m/s² annehmen.&lt;br /&gt;
         Wird das Gerät bewegt, so wird ausschließlich die Beschleunigungskraft 
@@ -175,7 +173,7 @@
         Die y-Achse ist relativ zu der oberen und unteren Seite des Smartphones.&lt;br /&gt;
         Die z-Achse ist relativ zur Vorder- und Rückseite des Smartphones.</string>
     <string name="infotext_magnetic_field">
-        Misst die Umgebungsmagnetstärke in µT, welche auf jede der drei 
+        Misst die magnetische Flussdichte in µT, welche auf jede der drei 
         physikalischen Achsen (x, y, z) wirkt.&lt;br /&gt;
         Befindet sich kein Magnet in der Nähe, so entsprechen die Werte denen des 
         Erdmagnetfeldes.&lt;br /&gt;
