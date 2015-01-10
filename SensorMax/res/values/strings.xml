@@ -228,11 +228,16 @@
 	    Diese App wurde von Leonardo Hübscher programmiert und entstand in der 
 	    Zusammenarbeit mit Robert Schurmann und Niels Bracher im Zuge eines Jugend Forscht  
 	    Projektes.&lt;br /&gt;
-	    Für die Darstellung des Graphen wird die &lt;a href="http://www.android-graphview.org/"
-	    &gt;GraphView&lt;/a&gt; - Bibliothek verwendet.
-	    &lt;br /&gt;&lt;br /&gt;
+	    &lt;br /&gt;
 	    Für mehr Informationen, Experimentiervorlagen, Tipps und Tricks besuche uns auf&lt;br /&gt;
 	    &lt;a href="http://www.sensormax.blogspot.de"&gt;http://www.sensormax.blogspot.de&lt;/a&gt;
+	    &lt;br /&gt;&lt;br /&gt;
+	    Für die Darstellung des Graphen wird die &lt;a href="http://www.android-graphview.org/"
+	    &gt;GraphView&lt;/a&gt; - Bibliothek verwendet.&lt;br /&gt;
+	    &lt;br /&gt;
+	    Wir sind Schüler des 12. Jahrgangs des &lt;a href="http://steenbeck-gymnasium.de/"
+	    &gt;Max-Steenbeck-Gymnasiums&lt;/a&gt;.&lt;br /&gt;
+	    
 	</string>
     
 </resources>
