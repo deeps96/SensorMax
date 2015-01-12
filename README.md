@@ -3,5 +3,5 @@ Source code for: https://play.google.com/store/apps/details?id=com.deeps.sensorm
 
 This app uses the following libraries:
 
-GraphView (http://www.android-graphview.org/)
+GraphView (http://www.android-graphview.org/) <br />
 ViewPagerIndicator (http://viewpagerindicator.com/)
