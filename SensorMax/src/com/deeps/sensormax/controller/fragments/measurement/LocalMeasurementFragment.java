@@ -332,7 +332,7 @@ public abstract class LocalMeasurementFragment extends SuperFragment implements
 			dataHandlerActivity.runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
-					resetView();
+					resetView();					
 				}
 			});
 		}
