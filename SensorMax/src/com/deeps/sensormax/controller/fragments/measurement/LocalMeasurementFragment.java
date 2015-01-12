@@ -328,6 +328,14 @@ public abstract class LocalMeasurementFragment extends SuperFragment implements
 
 	@Override
 	public void onStatusChanged() {
+		if (measurement.getState() == Measurement.STATE_RUNNING) {
+			dataHandlerActivity.runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					resetView();
+				}
+			});
+		}
 		updateButtons();
 	}
 
