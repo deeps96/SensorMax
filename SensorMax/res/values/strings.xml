@@ -164,11 +164,9 @@
         neben der Frontkamera.</string>
 	<string name="infotext_linear_acceleration">
         Misst die Beschleunigung in m/s^2 , welche auf jede der drei 
-        physikalischen Achsen (x, y, z) wirkt. (ohne der Fallbeschleunigung)&lt;br /&gt;
+        physikalischen Achsen (x, y, z) wirkt (ohne der Fallbeschleunigung).&lt;br /&gt;
         Wenn das Gerät ruhig auf einem Tisch liegt, so sollten alle Werte den 
         Wert 0 m/s² annehmen.&lt;br /&gt;
-        Wird das Gerät bewegt, so wird ausschließlich die Beschleunigungskraft 
-        angezeigt, die auf das Gerät wirkt.&lt;br /&gt;
         Die x-Achse ist relativ zu der linken und rechten Seite des Smartphones.&lt;br /&gt;
         Die y-Achse ist relativ zu der oberen und unteren Seite des Smartphones.&lt;br /&gt;
         Die z-Achse ist relativ zur Vorder- und Rückseite des Smartphones.</string>
