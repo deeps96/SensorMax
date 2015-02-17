@@ -30,7 +30,7 @@ import com.deeps.sensormax.model.activities.DataHandlerActivity;
 
 public class ToneGeneratorFragment extends SuperFragment {
 
-	private final int initProgress = 13000, initDuration = 5000;
+	private final int initProgress = 13000, initDuration = 5;
 
 	private Button startStopButton;
 	private EditText startFrequencyEditText, endFrequencyEditText;

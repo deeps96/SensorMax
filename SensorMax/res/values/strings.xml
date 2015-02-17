@@ -131,6 +131,7 @@
     <string name="cm">cm</string>
     <string name="phi_in_procent">Ï† in %</string>
     <string name="procent">%</string>
+    <string name="duration_in_s">Dauer in sek</string>
     <string name="infotext_acceleration">
         Misst die Beschleunigung in m/s^2 , welche auf jede der drei 
         physikalischen Achsen (x, y, z) wirkt. (Einschließlich der 
