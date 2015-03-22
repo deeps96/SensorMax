@@ -50,7 +50,8 @@ public class NavigationDrawerFragmentWrapper extends NavigationDrawerFragment {
 			case R.id.openMeasurementFragmentAction:
 				dataHandlerActivity.getGuiManager().changeContentFragment(
 					dataHandlerActivity.getMyFragmentManager()
-							.getGroupMeasurementFragment());
+							.getGroupMeasurementFragment(),
+					false);
 				dataHandlerActivity.invalidateOptionsMenu();
 				return true;
 			case R.id.shareMeasurementAction:
@@ -68,7 +69,8 @@ public class NavigationDrawerFragmentWrapper extends NavigationDrawerFragment {
 		dataHandlerActivity.getGuiManager().changeContentFragment(
 			((GroupMeasurementFragment) dataHandlerActivity.getGuiManager()
 					.getCurrentContentFragment()).getCurrentFragment()
-					.getMeasurementInfoFragment());
+					.getMeasurementInfoFragment(),
+			false);
 	}
 
 	public void showShareContentIntent() {

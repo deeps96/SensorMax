@@ -42,9 +42,11 @@ public class DataHandlerActivity extends NavigationActivity {
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		Fragment fragment = null;
+		boolean isGoingBack = false;
 		switch (position) {
 			case 0:
 				fragment = myFragmentManager.getHomeFragment();
+				isGoingBack = true;
 				break;
 			case 1:
 				fragment = myFragmentManager.getSensorOverviewFragment();
@@ -58,7 +60,7 @@ public class DataHandlerActivity extends NavigationActivity {
 			case 4:
 				fragment = myFragmentManager.getAboutFragment();
 		}
-		guiManager.changeContentFragment(fragment);
+		guiManager.changeContentFragment(fragment, isGoingBack);
 	}
 
 	@Override

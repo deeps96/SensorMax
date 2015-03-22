@@ -28,12 +28,6 @@ public class SensorMeasurement extends Measurement implements
 	}
 
 	@Override
-	protected void clearLocalBuffer() {
-		// TODO save - actions?
-		super.clearLocalBuffer();
-	}
-
-	@Override
 	public String getCSV() {
 		return Utils.convertToCSV(
 			sensor.getAxisLabels(),

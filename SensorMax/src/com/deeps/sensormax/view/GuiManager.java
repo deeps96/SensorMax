@@ -23,7 +23,8 @@ public class GuiManager {
 		this.dataHandlerActivity = dataHandlerActivity;
 	}
 
-	public void changeContentFragment(Fragment nextFragment) {
+	public void changeContentFragment(Fragment nextFragment,
+			boolean isNavigatingBack) {
 		if (nextFragment == currentContentFragment) {
 			return;
 		}
@@ -33,8 +34,21 @@ public class GuiManager {
 		currentContentFragment = (SuperFragment) nextFragment;
 		FragmentManager fragmentManager = dataHandlerActivity
 				.getSupportFragmentManager();
-		fragmentManager.beginTransaction()
-				.replace(R.id.container, nextFragment).commit();
+		if (isNavigatingBack) {
+			fragmentManager
+					.beginTransaction()
+					.setCustomAnimations(
+						R.anim.slide_back_in,
+						R.anim.slide_back_out)
+					.replace(R.id.container, nextFragment).commit();
+		} else {
+			fragmentManager
+					.beginTransaction()
+					.setCustomAnimations(
+						R.anim.slide_come_in,
+						R.anim.slide_come_out)
+					.replace(R.id.container, nextFragment).commit();
+		}
 		dataHandlerActivity.setActionBarTitle(((SuperFragment) nextFragment)
 				.getTitle());
 		dataHandlerActivity.invalidateOptionsMenu();

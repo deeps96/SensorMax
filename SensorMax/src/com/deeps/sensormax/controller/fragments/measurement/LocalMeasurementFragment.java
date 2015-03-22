@@ -103,7 +103,8 @@ public abstract class LocalMeasurementFragment extends SuperFragment implements
 		} else {
 			dataHandlerActivity.getGuiManager().changeContentFragment(
 				dataHandlerActivity.getMyFragmentManager()
-						.getSensorOverviewFragment());
+						.getSensorOverviewFragment(),
+				true);
 		}
 		return true;
 	}
@@ -332,7 +333,7 @@ public abstract class LocalMeasurementFragment extends SuperFragment implements
 			dataHandlerActivity.runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
-					resetView();					
+					resetView();
 				}
 			});
 		}

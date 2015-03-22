@@ -55,7 +55,8 @@ public class MeasurementInfoFragment extends SuperFragment {
 	public boolean onBackPressed() {
 		dataHandlerActivity.getGuiManager().changeContentFragment(
 			dataHandlerActivity.getMyFragmentManager()
-					.getGroupMeasurementFragment());
+					.getGroupMeasurementFragment(),
+			true);
 		return true;
 	}
 
