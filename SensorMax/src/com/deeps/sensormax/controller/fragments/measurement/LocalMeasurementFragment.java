@@ -1,5 +1,7 @@
 package com.deeps.sensormax.controller.fragments.measurement;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -34,7 +36,8 @@ import com.deeps.sensormax.model.measurement.Measurement;
 public abstract class LocalMeasurementFragment extends SuperFragment implements
 		OnStatusChangedListener {
 
-	protected boolean isGraphInFullscreenMode, isFullscreenModeEnabled;
+	protected boolean isGraphInFullscreenMode, isFullscreenModeEnabled,
+			isLiveStreamButtonActionBlocked;
 	protected GestureDetector gestureDetector;
 	private ScrollView interfaceLayout;
 	protected View fullscreenView, customView;
@@ -75,6 +78,13 @@ public abstract class LocalMeasurementFragment extends SuperFragment implements
 		initEnableLiveStreamButton();
 	}
 
+	@Override
+	public void onStop() {
+		((ToggleButton) view.findViewById(R.id.enableLiveStreamToggleButton))
+				.setChecked(false);
+		super.onStop();
+	}
+
 	private void initEnableLiveStreamButton() {
 		ToggleButton enableLiveStreamButton = (ToggleButton) view
 				.findViewById(R.id.enableLiveStreamToggleButton);
@@ -85,11 +95,43 @@ public abstract class LocalMeasurementFragment extends SuperFragment implements
 					public void onCheckedChanged(CompoundButton buttonView,
 							boolean isChecked) {
 						measurement.setLiveStreamEnabled(isChecked);
+						if (!isLiveStreamButtonActionBlocked) {
+							ArrayList<LocalMeasurementFragment> groupMembersFragments = dataHandlerActivity
+									.getMyFragmentManager()
+									.getGroupMeasurementFragment()
+									.getGroupMembers();
+							for (LocalMeasurementFragment fragment : groupMembersFragments) {
+								if (fragment.getTitle() != title) {
+									fragment.setLiveStreamButtonCheckedWithoutUpdate(isChecked);
+								}
+							}
+							if (isChecked) {
+								Measurement[] groupMembers = new Measurement[groupMembersFragments
+										.size()];
+								for (int iGroupMember = 0; iGroupMember < groupMembers.length; iGroupMember++) {
+									groupMembers[iGroupMember] = groupMembersFragments
+											.get(iGroupMember).getMeasurement();
+								}
+								dataHandlerActivity.getLiveStreamManager()
+										.startNewSession(groupMembers);
+							} else {
+								dataHandlerActivity.getLiveStreamManager()
+										.endCurrentSession();
+							}
+						} else {
+							isLiveStreamButtonActionBlocked = false;
+						}
 					}
 				});
 
 		enableLiveStreamButton.setEnabled(dataHandlerActivity.getMyConfig()
 				.isLiveStreamWellConfigurated());
+	}
+
+	public void setLiveStreamButtonCheckedWithoutUpdate(boolean isChecked) {
+		isLiveStreamButtonActionBlocked = true;
+		((ToggleButton) view.findViewById(R.id.enableLiveStreamToggleButton))
+				.setChecked(isChecked);
 	}
 
 	private void initInterfaceLayout() {

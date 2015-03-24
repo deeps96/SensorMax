@@ -100,8 +100,6 @@
     <string name="data_successfully_sended">Daten wurden erfolgreich versandt.\r&lt;br /&gt;Vielen Dank!</string>
     <string name="data_not_sent">Daten konnten nicht versandt werden.</string>
     <string name="send">Senden</string>
-    <string name="http">http://...</string>
-    <string name="address">Adresse</string>
     <string name="type">Typ</string>
     <string name="name">Name</string>
     <string name="vendor">Hersteller</string>
@@ -238,5 +236,19 @@
 	    &gt;Max-Steenbeck-Gymnasiums&lt;/a&gt;.&lt;br /&gt;
 	    
 	</string>
+	<string name="livestream_settings">Livestream-Einstellungen</string>
+	<string name="server">Serveradresse</string>
+	<string name="account_name">Accountname:</string>
+	<string name="password">Passwort:</string>
+	<string name="link">Verknüpfung erstellen</string>
+	<string name="create_link_to_user">Verknüpfung mit Benutzer erstellen</string>
+	<string name="error_no_connection_to_server">Keine Verbindung zum Server</string>
+	<string name="response_account_connection_already_set">Die Verknüpfung existiert bereits.</string>
+	<string name="response_account_connection_created">Die Verknüpfung wurde erstellt.</string>
+	<string name="response_account_connection_internal_server_error">Der Server konnte keine Verknüpfung herstellen.</string>
+	<string name="response_account_connection_wrong_password">Falsches Passwort!</string>
+	<string name="response_account_and_connection_created">Der Account und die Verknüpfung wurden erstellt.</string>
+	<string name="no_internet_connection">Keine Internetverbindung verfügbar!</string>
+	<string name="no_internet_connection_retry_in_delay">Keine Internetverbindung verfügbar! Neuer Versuch in 10 sek.</string>
     
 </resources>

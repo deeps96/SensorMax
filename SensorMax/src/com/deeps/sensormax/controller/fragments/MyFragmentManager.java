@@ -17,6 +17,7 @@ import com.deeps.sensormax.controller.fragments.measurementinfo.SensorMeasuremen
 import com.deeps.sensormax.controller.fragments.measurementinfo.ThinkGearMeasurementInfoFragment;
 import com.deeps.sensormax.controller.fragments.menu.AboutFragment;
 import com.deeps.sensormax.controller.fragments.menu.HomeFragment;
+import com.deeps.sensormax.controller.fragments.menu.LivestreamSettingsFragment;
 import com.deeps.sensormax.controller.fragments.menu.SensorOverviewFragment;
 import com.deeps.sensormax.controller.fragments.menu.SettingsFragment;
 import com.deeps.sensormax.controller.fragments.menu.ToneGeneratorFragment;
@@ -29,10 +30,11 @@ import com.deeps.sensormax.model.measurement.MeasurementManager;
 
 public class MyFragmentManager {
 
-	private final int ADDITIONAL_LOCAL_MEASUREMENTS = 3, EXTRA_COUNT = 6,
+	private final int ADDITIONAL_LOCAL_MEASUREMENTS = 3, EXTRA_COUNT = 7,
 			SENSOR_OVERVIEW = 0, HOME = 1, TONE_GENERATOR = 2, SETTINGS = 3,
-			ABOUT = 4, GROUP_MEASUREMENT = 5, AUDIO_MEASUREMENT = 0,
-			GPS_MEASUREMENT = 1, THINK_GEAR_MEASUREMENT = 2;
+			ABOUT = 4, GROUP_MEASUREMENT = 5, LIVESTREAM_SETTINGS = 6,
+			AUDIO_MEASUREMENT = 0, GPS_MEASUREMENT = 1,
+			THINK_GEAR_MEASUREMENT = 2;
 
 	private int availableSensors;
 	private DataHandlerActivity dataHandlerActivity;
@@ -61,6 +63,8 @@ public class MyFragmentManager {
 		extraFragments[SETTINGS] = new SettingsFragment(dataHandlerActivity);
 		extraFragments[ABOUT] = new AboutFragment(dataHandlerActivity);
 		extraFragments[GROUP_MEASUREMENT] = new GroupMeasurementFragment(
+				dataHandlerActivity);
+		extraFragments[LIVESTREAM_SETTINGS] = new LivestreamSettingsFragment(
 				dataHandlerActivity);
 
 		// assigning managers
@@ -176,6 +180,10 @@ public class MyFragmentManager {
 
 	public GroupMeasurementFragment getGroupMeasurementFragment() {
 		return (GroupMeasurementFragment) extraFragments[GROUP_MEASUREMENT];
+	}
+
+	public LivestreamSettingsFragment getLivestreamSettingsFragment() {
+		return (LivestreamSettingsFragment) extraFragments[LIVESTREAM_SETTINGS];
 	}
 
 	public GPSMeasuringFragment getGPSMeasuringFragment() {

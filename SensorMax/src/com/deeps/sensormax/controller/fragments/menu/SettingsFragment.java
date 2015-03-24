@@ -5,7 +5,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -52,58 +54,19 @@ public class SettingsFragment extends SuperFragment {
 		initKeepScreenOnWhileMeasuringCheckBox();
 		initShowSummaryAtEndCheckBox();
 		initMaxGraphViewShowTimeEditText();
-		initAddressEditText();
-		initDeviceIDEditText();
+		initLivestreamSettingsButton();
 	}
 
-	private void initDeviceIDEditText() {
-		final EditText deviceIDEditText = (EditText) view
-				.findViewById(R.id.deviceIDEditText);
-		if (myConfig.getDeviceID() != null
-				&& myConfig.getDeviceID().length() > 0) {
-			deviceIDEditText.setText(myConfig.getDeviceID());
-		}
-		deviceIDEditText.addTextChangedListener(new TextWatcher() {
-
+	private void initLivestreamSettingsButton() {
+		Button livestreamButton = (Button) view
+				.findViewById(R.id.livestreamButton);
+		livestreamButton.setOnClickListener(new OnClickListener() {
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				myConfig.setDeviceID(deviceIDEditText.getText().toString());
-			}
-		});
-	}
-
-	private void initAddressEditText() {
-		final EditText addressEditText = (EditText) view
-				.findViewById(R.id.addressEditText);
-		if (myConfig.getLiveStreamURL() != null
-				&& myConfig.getLiveStreamURL().length() > 0) {
-			addressEditText.setText(myConfig.getLiveStreamURL());
-		}
-		addressEditText.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				myConfig.setLiveStreamURL(addressEditText.getText().toString());
+			public void onClick(View v) {
+				dataHandlerActivity.getGuiManager().changeContentFragment(
+					dataHandlerActivity.getMyFragmentManager()
+							.getLivestreamSettingsFragment(),
+					false);
 			}
 		});
 	}

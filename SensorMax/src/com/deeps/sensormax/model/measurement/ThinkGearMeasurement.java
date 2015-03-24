@@ -40,7 +40,7 @@ public class ThinkGearMeasurement extends Measurement {
 	}
 
 	@Override
-	protected void updateUIValues(float[] modifiedData, long time) {
+	protected void updateUIValues(float[] modifiedData, int time) {
 		thinkGearFragment.update(modifiedData, time);
 	}
 

@@ -1,13 +1,15 @@
 package com.deeps.sensormax.model;
 
+import java.security.MessageDigest;
 import java.util.ArrayList;
-import java.util.UUID;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.hardware.SensorManager;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.util.Log;
 
 import com.deeps.sensormax.R;
@@ -41,7 +43,7 @@ public class MyConfig {
 			minDistanceDifferenceForUpdateInMeter = 0, groupMax = 1;
 	private Editor editor;
 	private SharedPreferences settings;
-	private String deviceID, liveStreamURL;
+	private String deviceHash, serverAddress;
 	private ArrayList<MySensor> availableSensors;
 
 	private DataHandlerActivity dataHandlerActivity;
@@ -69,11 +71,6 @@ public class MyConfig {
 	}
 
 	private void loadAllParams() {
-		deviceID = settings.getString("deviceID", null);
-		if (deviceID == null) { // happens if app got updated & no datawipe
-			assignDeviceID();
-			setDeviceID(deviceID);
-		}
 		interruptMeasuringOnMinimize = settings.getBoolean(
 			"interruptMeasuringOnMinimize",
 			true);
@@ -89,19 +86,46 @@ public class MyConfig {
 			false);
 		showSummaryAtEnd = settings.getBoolean("showSummaryAtEnd", true);
 		maxGraphViewShowTime = settings.getInt("maxGraphViewShowTime", 4000);
-		liveStreamURL = settings.getString("liveStreamURL", null);
 		isBluetoothAvailable = settings.getBoolean(
 			"isBluetoothAvailable",
 			false);
+		deviceHash = settings.getString("deviceHash", null);
+		if (deviceHash == null) { // if no clean install happend
+			generateDeviceHash();
+			editor.putString("deviceHash", deviceHash);
+			editor.commit();
+		}
+		serverAddress = settings.getString("serverAddress", "");
 		// apply settings
 		dataHandlerActivity.blockScreenRotation(isScreenRotationBlocked);
 	}
 
 	private void onFirstAppStart() {
 		editor.putBoolean("isFirstAppStart", false);
-		assignDeviceID();
-		editor.putString("deviceID", deviceID);
+		generateDeviceHash();
+		editor.putString("deviceHash", deviceHash);
 		performFullSensorCheck(); // editor gets commited here
+	}
+
+	private void generateDeviceHash() {
+		// http://stackoverflow.com/questions/5980658/how-to-sha1-hash-a-string-in-android
+		WifiManager manager = (WifiManager) dataHandlerActivity
+				.getSystemService(Context.WIFI_SERVICE);
+		WifiInfo info = manager.getConnectionInfo();
+
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-1");
+			md.update(info.getMacAddress().getBytes());
+			byte[] bytes = md.digest();
+			StringBuffer buffer = new StringBuffer();
+			for (int i = 0; i < bytes.length; i++) {
+				String tmp = Integer.toString((bytes[i] & 0xff) + 0x100, 16)
+						.substring(1);
+				buffer.append(tmp);
+			}
+			deviceHash = buffer.toString();
+		} catch (Exception e) {
+		}
 	}
 
 	private void initAppSettings() {
@@ -109,15 +133,6 @@ public class MyConfig {
 			dataHandlerActivity.getResources().getString(R.string.app_name),
 			Context.MODE_PRIVATE);
 		editor = settings.edit();
-	}
-
-	private void assignDeviceID() {
-		deviceID = UUID.randomUUID().toString().substring(0, 10); // String has
-																  // a length
-																  // from 1 to
-																  // 10 in this
-																  // case (i
-																  // think)
 	}
 
 	private void initAllSensors() {
@@ -209,10 +224,6 @@ public class MyConfig {
 		return showThinkGear;
 	}
 
-	public String getDeviceID() {
-		return deviceID;
-	}
-
 	public boolean isScreenRotationBlocked() {
 		return isScreenRotationBlocked;
 	}
@@ -235,12 +246,6 @@ public class MyConfig {
 
 	public int getGroupMax() {
 		return groupMax;
-	}
-
-	public void setDeviceID(String deviceID) {
-		editor.putString("deviceID", deviceID);
-		editor.commit();
-		this.deviceID = deviceID;
 	}
 
 	public void setInterruptMeasuringOnMinimize(
@@ -295,23 +300,26 @@ public class MyConfig {
 		this.maxGraphViewShowTime = maxGraphViewShowTime;
 	}
 
-	public String getLiveStreamURL() {
-		return liveStreamURL;
+	public String getDeviceHash() {
+		return deviceHash;
 	}
 
-	public void setLiveStreamURL(String liveStreamURL) {
-		editor.putString("liveStreamURL", liveStreamURL);
+	public String getServerAddress() {
+		return serverAddress;
+	}
+
+	public void setServerAddress(String serverAddress) {
+		editor.putString("serverAddress", serverAddress);
 		editor.commit();
-		this.liveStreamURL = liveStreamURL;
-	}
-
-	public boolean isLiveStreamWellConfigurated() {
-		return liveStreamURL != null && liveStreamURL.startsWith("http")
-				&& deviceID != null && deviceID.length() > 0;
+		this.serverAddress = serverAddress;
 	}
 
 	public boolean isBluetoothAvailable() {
 		return isBluetoothAvailable;
+	}
+
+	public boolean isLiveStreamWellConfigurated() {
+		return serverAddress.length() > 0;
 	}
 
 }

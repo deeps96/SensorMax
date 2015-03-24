@@ -93,7 +93,7 @@ public class SensorMeasurementFragment extends LocalMeasurementFragment {
 			final float[] average = sensorMeasurement.getAverage();
 			final float[] min = sensorMeasurement.getMin();
 			final float[] max = sensorMeasurement.getMax();
-			final long[] time = sensorMeasurement.getTime();
+			final int[] time = sensorMeasurement.getTime();
 
 			String averageText = "<b>Mittelwert in ["
 					+ sensor.getMeasuringUnit() + "]:</b><br /><br />";

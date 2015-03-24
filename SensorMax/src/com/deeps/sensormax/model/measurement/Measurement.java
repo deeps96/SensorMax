@@ -26,9 +26,9 @@ public abstract class Measurement implements Runnable {
 	protected boolean[] highlightedMeasuringValues;
 	protected int dataCounter, maxDataCounter, measuringIntervalInMS,
 			measuringTimeInMS, state = 0, groupID;
+	protected int[] time;
 	protected float[] recentDataSet, triggerValues, zeroing, average, min, max;
 	protected float[][] data;
-	protected long[] time;
 	protected SensorManager sensorManager;
 	protected ArrayList<OnStatusChangedListener> onStatusChangedListener;
 
@@ -63,7 +63,7 @@ public abstract class Measurement implements Runnable {
 		dataCounter = 0;
 		data = new float[maxDataCounter][];
 		highlightedMeasuringValues = new boolean[maxDataCounter];
-		time = new long[maxDataCounter];
+		time = new int[maxDataCounter];
 		min = new float[getAxisCount()];
 		max = new float[getAxisCount()];
 		for (int i = 0; i < min.length; i++) {
@@ -74,7 +74,6 @@ public abstract class Measurement implements Runnable {
 		}
 		isTriggerReleased = false;
 		registerListener();
-
 		while (state != STATE_STOPPED && !isTimeLimitExceeded()) {
 			if (isMemoryExceeded()) {
 				clearLocalBuffer();
@@ -92,14 +91,15 @@ public abstract class Measurement implements Runnable {
 					calculateMax(modifiedData);
 					calculateMin(modifiedData);
 					data[dataCounter] = modifiedData;
-					if (dataCounter > 0)
+					if (dataCounter > 0) {
 						time[dataCounter] = time[dataCounter - 1]
 								+ measuringIntervalInMS;
+					}
 					updateUIValues(modifiedData, time[dataCounter]);
 					if (isLiveStreamEnabled) {
 						sendDataToLiveStream(
 							modifiedData,
-							time[dataCounter],
+							System.currentTimeMillis(),
 							highlightedMeasuringValues[dataCounter]);
 					}
 					dataCounter++;
@@ -116,7 +116,7 @@ public abstract class Measurement implements Runnable {
 	protected void sendDataToLiveStream(float[] data, long time,
 			boolean isHighlighted) {
 		dataHandlerActivity.getLiveStreamManager().sendRealTimeData(
-			localMeasurementFragment.getTitle(),
+			localMeasurementFragment.getMeasurement().getTitle(),
 			data,
 			time,
 			isHighlighted);
@@ -250,8 +250,8 @@ public abstract class Measurement implements Runnable {
 		// TODO this method can be overwritten, to save the data - array into a
 		// file
 		data = new float[maxDataCounter][];
-		long lastTime = time[maxDataCounter];
-		time = new long[maxDataCounter];
+		int lastTime = time[maxDataCounter];
+		time = new int[maxDataCounter];
 		time[0] = lastTime;
 		dataCounter = 0;
 	}
@@ -297,7 +297,7 @@ public abstract class Measurement implements Runnable {
 
 	// Abstract methods
 
-	protected abstract void updateUIValues(float[] modifiedData, long time);
+	protected abstract void updateUIValues(float[] modifiedData, int time);
 
 	public abstract String getCSV();
 
@@ -335,7 +335,7 @@ public abstract class Measurement implements Runnable {
 		return data;
 	}
 
-	public long[] getTime() {
+	public int[] getTime() {
 		return time;
 	}
 
@@ -397,6 +397,10 @@ public abstract class Measurement implements Runnable {
 
 	public void setLiveStreamEnabled(boolean isLiveStreamEnabled) {
 		this.isLiveStreamEnabled = isLiveStreamEnabled;
+	}
+
+	public String getTitle() {
+		return localMeasurementFragment.getTitle();
 	}
 
 }

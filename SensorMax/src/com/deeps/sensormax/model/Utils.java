@@ -1,6 +1,5 @@
 package com.deeps.sensormax.model;
 
-
 /**
  * @author Deeps
  */
@@ -11,7 +10,7 @@ public class Utils {
 			.getProperty("line.separator");
 
 	public static String convertToCSV(String[] header, float[][] data,
-			long[] time, boolean[] isHighlighted, int dataCounter) {
+			int[] time, boolean[] isHighlighted, int dataCounter) {
 		String csv = "\"Zeit in ms:\";";
 		for (String s : header) {
 			csv += "\"" + s + "\";";
@@ -21,7 +20,7 @@ public class Utils {
 		}
 		csv += LINE_SEPERATOR;
 		for (int i = 0; i < dataCounter; i++) {
-			csv += "\"" + time[i] + "\";";
+			csv += "\"" + (time[i] - time[0]) + "\";";
 			for (float f : data[i]) {
 				csv += "\"" + Float.toString(f).replaceAll("\\.", ",") + "\";";
 			}

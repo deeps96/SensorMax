@@ -60,7 +60,7 @@ public class GPSMeasurement extends Measurement implements LocationListener,
 	}
 
 	@Override
-	protected void updateUIValues(float[] modifiedData, long time) {
+	protected void updateUIValues(float[] modifiedData, int time) {
 		gpsMeasuringFragment.update(modifiedData, time);
 	}
 

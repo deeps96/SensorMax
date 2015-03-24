@@ -71,7 +71,7 @@ public class AudioMeasurement extends Measurement {
 	}
 
 	@Override
-	protected void updateUIValues(float[] modifiedData, long time) {
+	protected void updateUIValues(float[] modifiedData, int time) {
 		audioMeasurementFragment.update(modifiedData, time);
 	}
 

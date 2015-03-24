@@ -24,6 +24,7 @@ public class GroupMeasurementFragment extends SuperFragment {
 
 	private ViewPager viewPager;
 
+	private ArrayList<LocalMeasurementFragment> groupMembers;
 	private SectionsPagerAdapter sectionsPagerAdapter;
 
 	public GroupMeasurementFragment() {
@@ -60,20 +61,19 @@ public class GroupMeasurementFragment extends SuperFragment {
 	}
 
 	public void updateGroupMembers() {
-		ArrayList<LocalMeasurementFragment> sensorFragments = new ArrayList<>();
+		groupMembers = new ArrayList<>();
 		for (LocalMeasurementFragment s : dataHandlerActivity
 				.getMyFragmentManager().getLocalMeasurementFragments()) {
 			if (s.getMeasurement().getGroupID() == 1) {
-				sensorFragments.add(s);
+				groupMembers.add(s);
 			}
 		}
-		initPager(sensorFragments);
+		initPager();
 		view.invalidate();
 	}
 
-	private void initPager(
-			final ArrayList<LocalMeasurementFragment> sensorFragments) {
-		sectionsPagerAdapter = new SectionsPagerAdapter(sensorFragments);
+	private void initPager() {
+		sectionsPagerAdapter = new SectionsPagerAdapter(groupMembers);
 
 		viewPager = (ViewPager) view.findViewById(R.id.pager);
 		viewPager.setAdapter(null);
@@ -90,8 +90,8 @@ public class GroupMeasurementFragment extends SuperFragment {
 		linePageIndicator.setOnPageChangeListener(new OnPageChangeListener() {
 			@Override
 			public void onPageSelected(int position) {
-				dataHandlerActivity.setActionBarTitle(sensorFragments.get(
-					position).getTitle());
+				dataHandlerActivity.setActionBarTitle(groupMembers
+						.get(position).getTitle());
 			}
 
 			@Override
@@ -104,10 +104,9 @@ public class GroupMeasurementFragment extends SuperFragment {
 
 			}
 		});
-		dataHandlerActivity
-				.setActionBarTitle(sensorFragments.get(0).getTitle());
+		dataHandlerActivity.setActionBarTitle(groupMembers.get(0).getTitle());
 
-		if (sensorFragments.size() == 1) {
+		if (groupMembers.size() == 1) {
 			linePageIndicator.setVisibility(View.GONE);
 		}
 	}
@@ -123,6 +122,10 @@ public class GroupMeasurementFragment extends SuperFragment {
 	public LocalMeasurementFragment getCurrentFragment() {
 		return sectionsPagerAdapter.sensorFragments.get(viewPager
 				.getCurrentItem());
+	}
+
+	public ArrayList<LocalMeasurementFragment> getGroupMembers() {
+		return groupMembers;
 	}
 
 	private class SectionsPagerAdapter extends FragmentPagerAdapter {

@@ -38,7 +38,7 @@ public class SensorMeasurement extends Measurement implements
 	}
 
 	@Override
-	protected void updateUIValues(float[] modifiedData, long time) {
+	protected void updateUIValues(float[] modifiedData, int time) {
 		if (sensorMeasurementFragment != null) {
 			sensorMeasurementFragment.update(modifiedData, time);
 		}
