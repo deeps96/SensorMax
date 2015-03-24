@@ -45,6 +45,13 @@ public class SensorMeasurement extends Measurement implements
 	}
 
 	@Override
+	protected void updateRecentDataSet() {
+		if (sensor.getType() == Sensor.TYPE_STEP_DETECTOR) {
+			recentDataSet[0] = 0;
+		}
+	}
+
+	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 	}
 

@@ -25,6 +25,7 @@ import com.deeps.sensormax.model.sensors.MySensor;
 import com.deeps.sensormax.model.sensors.Pressure;
 import com.deeps.sensormax.model.sensors.Proximity;
 import com.deeps.sensormax.model.sensors.RelativeHumidity;
+import com.deeps.sensormax.model.sensors.StepDetector;
 
 /**
  * @author Deeps
@@ -145,7 +146,8 @@ public class MyConfig {
 				new MagneticField(dataHandlerActivity),
 				new Pressure(dataHandlerActivity),
 				new Proximity(dataHandlerActivity),
-				new RelativeHumidity(dataHandlerActivity) };
+				new RelativeHumidity(dataHandlerActivity),
+				new StepDetector(dataHandlerActivity) };
 	}
 
 	private void loadAvailableSensors() {

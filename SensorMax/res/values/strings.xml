@@ -51,6 +51,7 @@
     <string name="sensor_pressure_name">Drucksensor</string>
     <string name="sensor_proximity_name">Näherungssensor</string>
     <string name="sensor_relative_humidity_name">Feuchtigkeitssensor</string>
+    <string name="sensor_step_detector_name">Schrittzähler</string>
     <string name="audio_analysis">Audioanalyse</string>
     <string name="gps_tracking">GPS-Ortung</string>
     <string name="livestream">Livestream</string>
@@ -58,6 +59,8 @@
     <string name="think_gear">Think Gear</string>
     <string name="channel_short">CH</string>
     <string name="heart_rate">Puls</string>
+    <string name="unitless">n</string>
+    <string name="step">Schritt</string>
     <string name="error_think_gear_not_found">Thinkgear nicht gefunden!</string>
     <string name="info_think_gear_connecting">Verbinde mit ThinkGear...</string>
     <string name="info_think_gear_disconnected">Verbindung getrennt</string>
@@ -214,6 +217,7 @@
         Herstellerseite&lt;/a&gt;
     	&lt;br /&gt;
     </string>
+    <string name="infotext_step_counter">TODO</string>
 	<string name="home_info">
 	    Vielen Dank, dass Du SensorMax auf deinem Smartphone installiert hast!&lt;br /&gt;
 	    Dein Smartphone ist nun ein leistungsfähiges Messgerät :)&lt;br /&gt;
