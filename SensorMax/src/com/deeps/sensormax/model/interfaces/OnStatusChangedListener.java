@@ -6,6 +6,6 @@ package com.deeps.sensormax.model.interfaces;
 
 public interface OnStatusChangedListener {
 
-	public void onStatusChanged();
+	public void onStatusChanged(int oldState);
 
 }

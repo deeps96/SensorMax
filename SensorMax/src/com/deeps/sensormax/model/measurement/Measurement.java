@@ -314,12 +314,13 @@ public abstract class Measurement implements Runnable {
 
 	// Getter & Setter
 	protected void setState(int state, boolean updateGroupMembers) {
+		int oldState = this.state;
 		this.state = state;
 		if (updateGroupMembers) {
 			updateGroupMemberState(state);
 		}
 		for (OnStatusChangedListener listener : onStatusChangedListener) {
-			listener.onStatusChanged();
+			listener.onStatusChanged(oldState);
 		}
 	}
 
