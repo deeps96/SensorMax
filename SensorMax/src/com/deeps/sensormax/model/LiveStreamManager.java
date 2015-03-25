@@ -40,7 +40,7 @@ import com.deeps.sensormax.model.sensors.MySensor;
 
 public class LiveStreamManager implements Runnable {
 
-	private final int delayTimeInMS = 10000;
+	private final int DELAY_TIME_IN_MS = 10000;
 	private final String TAG = getClass().getName();
 
 	private boolean delay;
@@ -68,26 +68,21 @@ public class LiveStreamManager implements Runnable {
 				switch (sendPostRequest(currentTask.getPostBody())) {
 					case HttpStatus.SC_OK:
 						tasks.poll();
+						if (currentTask.getType() == Task.TYPE_SUMMARY_LAST) {
+							showToast(dataHandlerActivity
+									.getString(R.string.overview_sent));
+						}
 						break;
 					case -1:
-						dataHandlerActivity.runOnUiThread(new Runnable() {
-							@Override
-							public void run() {
-								Toast
-										.makeText(
-											dataHandlerActivity,
-											dataHandlerActivity
-													.getString(R.string.no_internet_connection_retry_in_delay),
-											Toast.LENGTH_LONG).show();
-							}
-						});
+						showToast(dataHandlerActivity
+								.getString(R.string.no_internet_connection_retry_in_delay));
 						delay = true;
 						break;
 				}
 			}
 			try {
 				if (delay) {
-					Thread.sleep(delayTimeInMS);
+					Thread.sleep(DELAY_TIME_IN_MS);
 					delay = false;
 				} else {
 					Thread.sleep(5L);
@@ -95,6 +90,16 @@ public class LiveStreamManager implements Runnable {
 			} catch (InterruptedException e) {
 			}
 		}
+	}
+
+	public void showToast(final String text) {
+		dataHandlerActivity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				Toast.makeText(dataHandlerActivity, text, Toast.LENGTH_LONG)
+						.show();
+			}
+		});
 	}
 
 	public void connectDeviceToAccount(final String userName,
@@ -177,11 +182,11 @@ public class LiveStreamManager implements Runnable {
 	}
 
 	// SessionManagement
-	public void startNewSession(final Measurement[] groupMembers) {
+	public void startNewSession() {
 		if (groupMembers.length == 0) {
 			return;
 		}
-		this.groupMembers = groupMembers;
+		endCurrentSession();
 		List<NameValuePair> postBody = new LinkedList<>();
 		postBody.add(new BasicNameValuePair("hash", dataHandlerActivity
 				.getMyConfig().getDeviceHash()));
@@ -216,17 +221,27 @@ public class LiveStreamManager implements Runnable {
 						+ "][range]", "nA"));
 			}
 		}
-		tasks.add(new Task(postBody));
+		tasks.add(new Task(postBody, Task.TYPE_SESSION));
 	}
 
 	public void endCurrentSession() {
 		List<NameValuePair> postBody = new LinkedList<>();
 		postBody.add(new BasicNameValuePair("logoutRequested", "true"));
-		tasks.add(new Task(postBody));
+		tasks.add(new Task(postBody, Task.TYPE_SESSION));
 	}
 
 	public void sendRealTimeData(String measurementTitle, float[] data,
 			long time, boolean isHighlighted) {
+		tasks.add(new Task(createPostBodyForDataInsertion(
+			measurementTitle,
+			data,
+			time,
+			isHighlighted)));
+	}
+
+	private List<NameValuePair> createPostBodyForDataInsertion(
+			String measurementTitle, float[] data, long time,
+			boolean isHighlighted) {
 		int sensorID = getSensorIDByMeasurementTitle(measurementTitle);
 		List<NameValuePair> postBody = new LinkedList<>();
 		postBody.add(new BasicNameValuePair("sensorID", Integer
@@ -238,7 +253,8 @@ public class LiveStreamManager implements Runnable {
 			postBody.add(new BasicNameValuePair("data[" + iData + "]", Float
 					.toString(data[iData])));
 		}
-		tasks.add(new Task(postBody));
+		postBody.add(new BasicNameValuePair("highlighted", "true"));
+		return postBody;
 	}
 
 	private int getSensorIDByMeasurementTitle(String measurementTitle) {
@@ -249,9 +265,40 @@ public class LiveStreamManager implements Runnable {
 		return -1;
 	}
 
-	public void sendSummaryData(String sensorName, float[] min, float[] max,
-			float[] avg, long measuringTime) {
-		// TODO
+	public void sendSummaryData(String measurementTitle, float[] min,
+			float[] max, float[] avg, long measuringTime, long time,
+			boolean wasLivestreamEnabled) {
+		if (!wasLivestreamEnabled) {
+			startNewSession();
+		}
+
+		List<NameValuePair> postBody = createPostBodyForDataInsertion(
+			measurementTitle,
+			min,
+			time,
+			false);
+		postBody.add(new BasicNameValuePair("min", "true"));
+		tasks.add(new Task(postBody, Task.TYPE_SUMMARY));
+
+		postBody = createPostBodyForDataInsertion(
+			measurementTitle,
+			avg,
+			time,
+			false);
+		postBody.add(new BasicNameValuePair("avg", "true"));
+		tasks.add(new Task(postBody, Task.TYPE_SUMMARY));
+
+		postBody = createPostBodyForDataInsertion(
+			measurementTitle,
+			max,
+			time,
+			false);
+		postBody.add(new BasicNameValuePair("max", "true"));
+		tasks.add(new Task(postBody, Task.TYPE_SUMMARY_LAST));
+
+		if (!wasLivestreamEnabled) {
+			endCurrentSession();
+		}
 	}
 
 	private int sendPostRequest(List<NameValuePair> postBody) {
@@ -281,7 +328,6 @@ public class LiveStreamManager implements Runnable {
 
 			// ResponseHandler<String> responseHandler = new
 			// BasicResponseHandler();
-			// Response Body
 			// String responseBody =
 			// responseHandler.handleResponse(httpResponse);
 			// System.out.println(responseBody);
@@ -296,16 +342,33 @@ public class LiveStreamManager implements Runnable {
 		}
 	}
 
+	public void setGroupMembers(Measurement[] groupMembers) {
+		this.groupMembers = groupMembers;
+	}
+
 	private class Task {
 
+		private final static int TYPE_DATA = 0, TYPE_SUMMARY = 1,
+				TYPE_SESSION = 2, TYPE_SUMMARY_LAST = 3;
+
 		private List<NameValuePair> postBody;
+		private int type;
 
 		public Task(List<NameValuePair> postBody) {
+			this(postBody, TYPE_DATA);
+		}
+
+		public Task(List<NameValuePair> postBody, int type) {
 			this.postBody = postBody;
+			this.type = type;
 		}
 
 		public List<NameValuePair> getPostBody() {
 			return postBody;
+		}
+
+		public int getType() {
+			return type;
 		}
 	}
 

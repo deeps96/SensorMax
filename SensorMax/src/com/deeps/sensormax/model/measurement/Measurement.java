@@ -104,7 +104,6 @@ public abstract class Measurement implements Runnable {
 					}
 					dataCounter++;
 				}
-				updateRecentDataSet();
 			}
 			try {
 				Thread.sleep(measuringIntervalInMS);
@@ -297,10 +296,6 @@ public abstract class Measurement implements Runnable {
 	}
 
 	// Abstract methods
-
-	protected void updateRecentDataSet() {
-		// gets overwritten by children class, if necessary
-	}
 
 	protected abstract void updateUIValues(float[] modifiedData, int time);
 

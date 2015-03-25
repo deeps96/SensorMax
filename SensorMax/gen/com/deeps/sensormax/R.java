@@ -2371,6 +2371,7 @@ containing a value of this type.
         public static final int online=0x7f0b0071;
         public static final int open=0x7f0b0065;
         public static final int overview=0x7f0b005f;
+        public static final int overview_sent=0x7f0b00b2;
         public static final int p_in_hpa=0x7f0b008d;
         public static final int password=0x7f0b00a7;
         public static final int pause=0x7f0b0028;

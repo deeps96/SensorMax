@@ -254,5 +254,6 @@
 	<string name="response_account_and_connection_created">Der Account und die Verknüpfung wurden erstellt.</string>
 	<string name="no_internet_connection">Keine Internetverbindung verfügbar!</string>
 	<string name="no_internet_connection_retry_in_delay">Keine Internetverbindung verfügbar! Neuer Versuch in 10 sek.</string>
+	<string name="overview_sent">Die Übersicht wurde versandt.</string>
     
 </resources>

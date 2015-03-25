@@ -19,6 +19,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.deeps.sensormax.R;
 import com.deeps.sensormax.model.activities.DataHandlerActivity;
@@ -143,11 +144,15 @@ public class SensorMeasurementFragment extends LocalMeasurementFragment {
 							dataHandlerActivity
 									.getLiveStreamManager()
 									.sendSummaryData(
-										getTitle(),
+										measurement.getTitle(),
 										min,
 										max,
 										average,
-										time[sensorMeasurement.getDataCounter() - 1]);
+										time[sensorMeasurement.getDataCounter() - 1],
+										System.currentTimeMillis(),
+										((ToggleButton) view
+												.findViewById(R.id.enableLiveStreamToggleButton))
+												.isChecked());
 						}
 					});
 			}

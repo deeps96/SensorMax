@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.deeps.sensormax.R;
 import com.deeps.sensormax.controller.fragments.SuperFragment;
 import com.deeps.sensormax.model.activities.DataHandlerActivity;
+import com.deeps.sensormax.model.measurement.Measurement;
 import com.viewpagerindicator.LinePageIndicator;
 
 /**
@@ -68,8 +69,20 @@ public class GroupMeasurementFragment extends SuperFragment {
 				groupMembers.add(s);
 			}
 		}
+		dataHandlerActivity.getLiveStreamManager().setGroupMembers(
+			getGroupMemberMeasurements());
 		initPager();
 		view.invalidate();
+	}
+
+	private Measurement[] getGroupMemberMeasurements() {
+		Measurement[] groupMemberMeasurements = new Measurement[groupMembers
+				.size()];
+		for (int iGroupMember = 0; iGroupMember < groupMemberMeasurements.length; iGroupMember++) {
+			groupMemberMeasurements[iGroupMember] = groupMembers.get(
+				iGroupMember).getMeasurement();
+		}
+		return groupMemberMeasurements;
 	}
 
 	private void initPager() {

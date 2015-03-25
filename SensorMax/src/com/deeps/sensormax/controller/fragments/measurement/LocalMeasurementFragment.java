@@ -106,14 +106,8 @@ public abstract class LocalMeasurementFragment extends SuperFragment implements
 								}
 							}
 							if (isChecked) {
-								Measurement[] groupMembers = new Measurement[groupMembersFragments
-										.size()];
-								for (int iGroupMember = 0; iGroupMember < groupMembers.length; iGroupMember++) {
-									groupMembers[iGroupMember] = groupMembersFragments
-											.get(iGroupMember).getMeasurement();
-								}
 								dataHandlerActivity.getLiveStreamManager()
-										.startNewSession(groupMembers);
+										.startNewSession();
 							} else {
 								dataHandlerActivity.getLiveStreamManager()
 										.endCurrentSession();
@@ -126,6 +120,7 @@ public abstract class LocalMeasurementFragment extends SuperFragment implements
 
 		enableLiveStreamButton.setEnabled(dataHandlerActivity.getMyConfig()
 				.isLiveStreamWellConfigurated());
+
 	}
 
 	public void setLiveStreamButtonCheckedWithoutUpdate(boolean isChecked) {
