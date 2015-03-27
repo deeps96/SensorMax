@@ -9,6 +9,7 @@ import android.widget.LinearLayout.LayoutParams;
 import com.deeps.sensormax.R;
 import com.deeps.sensormax.model.FileManager;
 import com.deeps.sensormax.model.activities.DataHandlerActivity;
+import com.deeps.sensormax.model.measurement.Measurement;
 
 /**
  * @author Deeps
@@ -25,8 +26,7 @@ public class FileController {
 		this.fileManager = fileManager;
 	}
 
-	public void showSaveMeasurementDialog(final String measuringType,
-			final String content) {
+	public void showSaveMeasurementDialog(final Measurement measurement) {
 		AlertDialog.Builder alertDialog = new AlertDialog.Builder(
 				dataHandlerActivity);
 
@@ -51,53 +51,9 @@ public class FileController {
 			new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int whichButton) {
-					fileManager.saveMeasurement(
-						measuringType + "/"
-								+ fileNameEditText.getText().toString()
-								+ ".csv",
-						content);
+					fileManager.saveMeasurement(measurement, fileNameEditText
+							.getText().toString());
 
-				}
-			});
-
-		alertDialog.setNegativeButton(
-			dataHandlerActivity.getString(R.string.cancel),
-			new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int whichButton) {
-					dialog.cancel();
-				}
-			});
-
-		alertDialog.show();
-	}
-
-	public void showSaveFileDialog(final String dialogTitle,
-			final String dialogMessage, final String dataContent) {
-		AlertDialog.Builder alertDialog = new AlertDialog.Builder(
-				dataHandlerActivity);
-
-		alertDialog.setTitle(dialogTitle);
-		alertDialog.setMessage(dialogMessage);
-
-		final EditText fileNameEditText = new EditText(dataHandlerActivity);
-		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT,
-				LayoutParams.WRAP_CONTENT);
-		params.setMargins(50, 50, 50, 50);
-		fileNameEditText.setLayoutParams(params);
-
-		LinearLayout linearLayout = new LinearLayout(dataHandlerActivity);
-		linearLayout.addView(fileNameEditText);
-
-		alertDialog.setView(linearLayout);
-
-		alertDialog.setPositiveButton(
-			dataHandlerActivity.getString(R.string.save),
-			new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int whichButton) {
-					fileManager.saveAppFile(fileNameEditText.getText()
-							.toString(), dataContent, false, true);
 				}
 			});
 

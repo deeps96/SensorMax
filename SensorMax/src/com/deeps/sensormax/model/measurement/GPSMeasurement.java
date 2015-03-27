@@ -65,7 +65,7 @@ public class GPSMeasurement extends Measurement implements LocationListener,
 	}
 
 	@Override
-	public String getCSV() {
+	public String getCSVHeader() {
 		String[] header = new String[getAxisCount()];
 		header[LATITUDE_INDEX] = dataHandlerActivity
 				.getString(R.string.latitude);
@@ -74,12 +74,16 @@ public class GPSMeasurement extends Measurement implements LocationListener,
 		header[SPEED_INDEX] = dataHandlerActivity.getString(R.string.speed);
 		header[SATELLITES_COUNT_INDEX] = dataHandlerActivity
 				.getString(R.string.satellite_count);
-		return Utils.convertToCSV(
-			header,
-			data,
-			time,
-			highlightedMeasuringValues,
-			dataCounter);
+		return Utils.convertHeaderToCSV(header);
+	}
+
+	@Override
+	public String getCSV(int currentDataIndex) {
+		Utils.convertDataSetToCSV(
+			data[currentDataIndex],
+			time[currentDataIndex],
+			highlightedMeasuringValues[currentDataIndex]);
+		return null;
 	}
 
 	@Override

@@ -38,7 +38,8 @@ public class MyConfig {
 	private boolean isFirstAppStart, interruptMeasuringOnMinimize,
 			isNetworkLocatingAllowed, showThinkGear, isScreenRotationBlocked,
 			keepScreenONWhileMeasuring, showSummaryAtEnd, isBluetoothAvailable,
-			useAutoScaling = true, showWholeGraphAtEnd = true;
+			recordWholeAudioSpectrum, useAutoScaling = true,
+			showWholeGraphAtEnd = true;
 	private int maxGraphViewShowTime, bufferSizeLocalMeasuring = 180000,
 			defaultMeasuringInterval = 20,
 			minDistanceDifferenceForUpdateInMeter = 0, groupMax = 1;
@@ -97,6 +98,9 @@ public class MyConfig {
 			editor.commit();
 		}
 		serverAddress = settings.getString("serverAddress", "");
+		recordWholeAudioSpectrum = settings.getBoolean(
+			"recordWholeAudioSpectrum",
+			false);
 		// apply settings
 		dataHandlerActivity.blockScreenRotation(isScreenRotationBlocked);
 	}
@@ -322,6 +326,16 @@ public class MyConfig {
 
 	public boolean isLiveStreamWellConfigurated() {
 		return serverAddress.length() > 0;
+	}
+
+	public boolean isRecordWholeAudioSpectrum() {
+		return recordWholeAudioSpectrum;
+	}
+
+	public void setRecordWholeAudioSpectrum(boolean recordWholeAudioSpectrum) {
+		editor.putBoolean("recordWholeAudioSpectrum", recordWholeAudioSpectrum);
+		editor.commit();
+		this.recordWholeAudioSpectrum = recordWholeAudioSpectrum;
 	}
 
 }

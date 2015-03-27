@@ -255,5 +255,10 @@
 	<string name="no_internet_connection">Keine Internetverbindung verfügbar!</string>
 	<string name="no_internet_connection_retry_in_delay">Keine Internetverbindung verfügbar! Neuer Versuch in 10 sek.</string>
 	<string name="overview_sent">Die Übersicht wurde versandt.</string>
+	<string name="save_progress">Speichervorgang</string>
+	<string name="dataset_saved">Datensätze gespeichert.</string>
+	<string name="save_aborted">Speichervorgang abgebrochen.</string>
+	<string name="save_finished">Speichervorgang abgeschlossen.</string>
+	<string name="record_audio_spectrum">Zeichne zusätzlich zu DB und Frequenz Audiospektrum auf.</string>
     
 </resources>

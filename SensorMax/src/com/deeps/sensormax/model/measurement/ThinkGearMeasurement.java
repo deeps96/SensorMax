@@ -53,7 +53,7 @@ public class ThinkGearMeasurement extends Measurement {
 	}
 
 	@Override
-	public String getCSV() {
+	public String getCSVHeader() {
 		String[] header = new String[getAxisCount()];
 		String channelShort = dataHandlerActivity
 				.getString(R.string.channel_short);
@@ -62,13 +62,15 @@ public class ThinkGearMeasurement extends Measurement {
 		}
 		header[CHANNEL_COUNT + 0] = dataHandlerActivity
 				.getString(R.string.heart_rate);
-		return Utils.convertToCSV(
-			header,
-			data,
-			time,
-			highlightedMeasuringValues,
-			dataCounter);
+		return Utils.convertHeaderToCSV(header);
+	}
 
+	@Override
+	public String getCSV(int currentDataIndex) {
+		return Utils.convertDataSetToCSV(
+			data[currentDataIndex],
+			time[currentDataIndex],
+			highlightedMeasuringValues[currentDataIndex]);
 	}
 
 	@Override

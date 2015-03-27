@@ -90,12 +90,13 @@ public abstract class Measurement implements Runnable {
 					}
 					calculateMax(modifiedData);
 					calculateMin(modifiedData);
-					data[dataCounter] = modifiedData;
 					if (dataCounter > 0) {
 						time[dataCounter] = time[dataCounter - 1]
 								+ measuringIntervalInMS;
 					}
 					updateUIValues(modifiedData, time[dataCounter]);
+					modifiedData = changeDataForStoragePurposes(modifiedData);
+					data[dataCounter] = modifiedData;
 					if (isLiveStreamEnabled) {
 						sendDataToLiveStream(
 							modifiedData,
@@ -287,19 +288,21 @@ public abstract class Measurement implements Runnable {
 	}
 
 	public void saveDataUsingDialog() {
-		dataHandlerActivity
-				.getFileManager()
-				.getFileController()
-				.showSaveMeasurementDialog(
-					localMeasurementFragment.getTitle(),
-					getCSV());
+		dataHandlerActivity.getFileManager().getFileController()
+				.showSaveMeasurementDialog(this);
 	}
 
 	// Abstract methods
 
-	protected abstract void updateUIValues(float[] modifiedData, int time);
+	protected float[] changeDataForStoragePurposes(float[] modifiedData) {
+		return modifiedData;
+	}
 
-	public abstract String getCSV();
+	public abstract String getCSVHeader();
+
+	public abstract String getCSV(int currentDataIndex);
+
+	protected abstract void updateUIValues(float[] modifiedData, int time);
 
 	protected abstract int getAxisCount();
 

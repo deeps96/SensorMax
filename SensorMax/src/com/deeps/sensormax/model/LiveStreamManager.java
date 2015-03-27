@@ -19,13 +19,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.graphics.Typeface;
-import android.text.SpannableString;
-import android.text.style.StyleSpan;
-import android.view.Gravity;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.deeps.sensormax.R;
@@ -33,6 +26,7 @@ import com.deeps.sensormax.model.activities.DataHandlerActivity;
 import com.deeps.sensormax.model.measurement.Measurement;
 import com.deeps.sensormax.model.measurement.SensorMeasurement;
 import com.deeps.sensormax.model.sensors.MySensor;
+import com.deeps.sensormax.view.DialogManager;
 
 /**
  * @author Deeps
@@ -141,44 +135,9 @@ public class LiveStreamManager implements Runnable {
 								.getString(R.string.no_internet_connection);
 						break;
 				}
-				showConfirmDialog(response);
+				DialogManager.showConfirmDialog(dataHandlerActivity, response);
 			}
 		}).start();
-	}
-
-	private void showConfirmDialog(final String text) {
-		if (text == null) {
-			return;
-		}
-		dataHandlerActivity.runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				AlertDialog.Builder dialog = new AlertDialog.Builder(
-						dataHandlerActivity);
-
-				TextView messageTextView = new TextView(dataHandlerActivity);
-				messageTextView.setTextSize(22);
-				SpannableString spanString = new SpannableString(text);
-				spanString.setSpan(
-					new StyleSpan(Typeface.BOLD),
-					0,
-					spanString.length(),
-					0);
-				messageTextView.setText(spanString);
-				messageTextView.setGravity(Gravity.CENTER);
-				dialog.setView(messageTextView);
-				dialog.setPositiveButton(
-					dataHandlerActivity.getString(R.string.ok),
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog,
-								int whichButton) {
-							dialog.dismiss();
-						}
-					});
-				dialog.show();
-			}
-		});
 	}
 
 	// SessionManagement

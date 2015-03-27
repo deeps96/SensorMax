@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import com.deeps.sensormax.R;
 import com.deeps.sensormax.model.activities.DataHandlerActivity;
@@ -81,13 +80,6 @@ public class AudioMeasurementFragment extends LocalMeasurementFragment {
 	@Override
 	protected void initUIComponents() {
 		super.initUIComponents();
-		disableLiveStreamButton();
-	}
-
-	private void disableLiveStreamButton() {
-		ToggleButton enableLiveStreamButton = (ToggleButton) view
-				.findViewById(R.id.enableLiveStreamToggleButton);
-		enableLiveStreamButton.setEnabled(false);
 	}
 
 	@Override

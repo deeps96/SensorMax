@@ -76,28 +76,41 @@ public class AudioMeasurement extends Measurement {
 	}
 
 	@Override
-	public String getCSV() {
-		float subFrequency = sampleRate / BLOCK_SIZE;
-		String[] header = new String[BLOCK_SIZE + EXTRA_INFORMATION_COUNT];
-		for (int i = 0; i < BLOCK_SIZE; i++) {
-			header[i] = Float.toString(subFrequency * i);
-		}
-		header[BLOCK_SIZE + FREQUENCY_INDEX] = dataHandlerActivity
-				.getString(R.string.frequency);
-		header[BLOCK_SIZE + DECIBLE_INDEX] = dataHandlerActivity
-				.getString(R.string.decible);
+	public String getCSV(int currentDataIndex) {
+		return Utils.convertDataSetToCSV(
+			data[currentDataIndex],
+			time[currentDataIndex],
+			highlightedMeasuringValues[currentDataIndex]);
+	}
 
-		return Utils.convertToCSV(
-			header,
-			data,
-			time,
-			highlightedMeasuringValues,
-			dataCounter);
+	@Override
+	public String getCSVHeader() {
+		String[] header = null;
+		if (dataHandlerActivity.getMyConfig().isRecordWholeAudioSpectrum()) {
+			float subFrequency = sampleRate / BLOCK_SIZE;
+			header = new String[BLOCK_SIZE + EXTRA_INFORMATION_COUNT];
+			for (int i = 0; i < BLOCK_SIZE; i++) {
+				header[i] = Float.toString(subFrequency * i) + " Hz";
+			}
+			header[BLOCK_SIZE + FREQUENCY_INDEX] = dataHandlerActivity
+					.getString(R.string.frequency);
+			header[BLOCK_SIZE + DECIBLE_INDEX] = dataHandlerActivity
+					.getString(R.string.decible);
+		} else {
+			header = new String[EXTRA_INFORMATION_COUNT];
+			header[FREQUENCY_INDEX] = dataHandlerActivity
+					.getString(R.string.frequency);
+			header[DECIBLE_INDEX] = dataHandlerActivity
+					.getString(R.string.decible);
+		}
+
+		return Utils.convertHeaderToCSV(header);
 	}
 
 	@Override
 	protected int getAxisCount() {
-		return BLOCK_SIZE + EXTRA_INFORMATION_COUNT; // 2 ... db and frequency
+		return BLOCK_SIZE + EXTRA_INFORMATION_COUNT; // 2 ... db and
+													 // frequency
 	}
 
 	@Override
@@ -113,6 +126,19 @@ public class AudioMeasurement extends Measurement {
 		if (recordTask != null) {
 			recordTask.cancel(true);
 		}
+	}
+
+	@Override
+	protected float[] changeDataForStoragePurposes(float[] modifiedData) {
+		if (!dataHandlerActivity.getMyConfig().isRecordWholeAudioSpectrum()) {
+			float[] modifiedDataB = new float[EXTRA_INFORMATION_COUNT];
+			modifiedDataB[FREQUENCY_INDEX] = modifiedData[BLOCK_SIZE
+					+ FREQUENCY_INDEX];
+			modifiedDataB[DECIBLE_INDEX] = modifiedData[BLOCK_SIZE
+					+ DECIBLE_INDEX];
+			return modifiedDataB;
+		}
+		return super.changeDataForStoragePurposes(modifiedData);
 	}
 
 	private class RecordAudio extends AsyncTask<Void, double[], Void> {

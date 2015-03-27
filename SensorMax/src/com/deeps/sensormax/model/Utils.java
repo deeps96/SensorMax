@@ -1,5 +1,6 @@
 package com.deeps.sensormax.model;
 
+
 /**
  * @author Deeps
  */
@@ -9,31 +10,32 @@ public class Utils {
 	private static final String LINE_SEPERATOR = System
 			.getProperty("line.separator");
 
-	public static String convertToCSV(String[] header, float[][] data,
-			int[] time, boolean[] isHighlighted, int dataCounter) {
-		String csv = "\"Zeit in ms:\";";
+	public static String convertHeaderToCSV(String[] header) {
+		StringBuilder csvStringBuilder = new StringBuilder();
+		csvStringBuilder.append("\"Zeit in ms:\";");
 		for (String s : header) {
-			csv += "\"" + s + "\";";
+			csvStringBuilder.append("\"" + s + "\";");
 		}
-		if (isHighlighted != null) {
-			csv += "\"Markiert:\";";
+		csvStringBuilder.append("\"Markiert:\";");
+		csvStringBuilder.append(LINE_SEPERATOR);
+		return csvStringBuilder.toString();
+	}
+
+	public static String convertDataSetToCSV(float[] data, int time,
+			boolean isHighlighted) {
+		StringBuilder csvStringBuilder = new StringBuilder();
+		csvStringBuilder.append("\"" + time + "\";");
+		for (float f : data) {
+			csvStringBuilder.append("\""
+					+ Float.toString(f).replaceAll("\\.", ",") + "\";");
 		}
-		csv += LINE_SEPERATOR;
-		for (int i = 0; i < dataCounter; i++) {
-			csv += "\"" + (time[i] - time[0]) + "\";";
-			for (float f : data[i]) {
-				csv += "\"" + Float.toString(f).replaceAll("\\.", ",") + "\";";
-			}
-			if (isHighlighted != null) {
-				if (isHighlighted[i]) {
-					csv += "\"x\";";
-				} else {
-					csv += "\"\";";
-				}
-			}
-			csv += LINE_SEPERATOR;
+		if (isHighlighted) {
+			csvStringBuilder.append("\"x\";");
+		} else {
+			csvStringBuilder.append("\"\";");
 		}
-		return csv;
+		csvStringBuilder.append(LINE_SEPERATOR);
+		return csvStringBuilder.toString();
 	}
 
 }

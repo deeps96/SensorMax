@@ -28,13 +28,16 @@ public class SensorMeasurement extends Measurement implements
 	}
 
 	@Override
-	public String getCSV() {
-		return Utils.convertToCSV(
-			sensor.getAxisLabels(),
-			data,
-			time,
-			highlightedMeasuringValues,
-			dataCounter);
+	public String getCSV(int currentDataIndex) {
+		return Utils.convertDataSetToCSV(
+			data[currentDataIndex],
+			time[currentDataIndex],
+			highlightedMeasuringValues[currentDataIndex]);
+	}
+
+	@Override
+	public String getCSVHeader() {
+		return Utils.convertHeaderToCSV(sensor.getAxisLabels());
 	}
 
 	@Override

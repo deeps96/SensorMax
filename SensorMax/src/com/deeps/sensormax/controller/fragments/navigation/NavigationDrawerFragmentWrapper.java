@@ -11,6 +11,7 @@ import com.deeps.sensormax.R;
 import com.deeps.sensormax.controller.fragments.measurement.GroupMeasurementFragment;
 import com.deeps.sensormax.controller.fragments.measurement.LocalMeasurementFragment;
 import com.deeps.sensormax.model.activities.DataHandlerActivity;
+import com.deeps.sensormax.model.measurement.MeasurementParser;
 
 /**
  * @author Deeps
@@ -74,25 +75,34 @@ public class NavigationDrawerFragmentWrapper extends NavigationDrawerFragment {
 	}
 
 	public void showShareContentIntent() {
-		LocalMeasurementFragment localMeasurementFragment = dataHandlerActivity
-				.getMyFragmentManager().getGroupMeasurementFragment()
-				.getCurrentFragment();
-		lastSharedFile = dataHandlerActivity.getFileManager().saveAppFile(
-			System.currentTimeMillis() + ".csv",
-			localMeasurementFragment.getMeasurement().getCSV(),
-			false,
-			false);
+		new Thread(new Runnable() {
 
-		Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-		sharingIntent.setType("*/*");
-		Uri uri = Uri.fromFile(lastSharedFile);
-		sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
+			@Override
+			public void run() {
+				LocalMeasurementFragment localMeasurementFragment = dataHandlerActivity
+						.getMyFragmentManager().getGroupMeasurementFragment()
+						.getCurrentFragment();
+				lastSharedFile = dataHandlerActivity.getFileManager()
+						.saveMeasurementFile(
+							System.currentTimeMillis() + ".csv",
+							new MeasurementParser(localMeasurementFragment
+									.getMeasurement()),
+							false,
+							false);
 
-		startActivityForResult(
-			Intent.createChooser(
-				sharingIntent,
-				dataHandlerActivity.getString(R.string.share_measurement)),
-			RQ_SHARE);
+				Intent sharingIntent = new Intent(
+						android.content.Intent.ACTION_SEND);
+				sharingIntent.setType("*/*");
+				Uri uri = Uri.fromFile(lastSharedFile);
+				sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
+
+				startActivityForResult(
+					Intent.createChooser(sharingIntent, dataHandlerActivity
+							.getString(R.string.share_measurement)),
+					RQ_SHARE);
+			}
+		}).start();
+
 	}
 
 	@Override

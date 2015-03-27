@@ -18,6 +18,10 @@ import android.widget.Toast;
 import com.deeps.sensormax.R;
 import com.deeps.sensormax.controller.FileController;
 import com.deeps.sensormax.model.activities.DataHandlerActivity;
+import com.deeps.sensormax.model.measurement.Measurement;
+import com.deeps.sensormax.model.measurement.MeasurementParser;
+import com.deeps.sensormax.model.measurement.MyParserInterface;
+import com.deeps.sensormax.view.DialogManager;
 
 /**
  * @author Deeps
@@ -27,6 +31,8 @@ public class FileManager {
 
 	private final String DIR_NAME = "messungen", TAG = getClass().getName(),
 			APP_CONFIG_FILE_NAME = "appconfig.txt";
+
+	private boolean abortSaveProgress;
 
 	private String rootDir;
 
@@ -41,7 +47,23 @@ public class FileManager {
 		fileController = new FileController(dataHandlerActivity, this);
 	}
 
-	public File saveAppFile(String filePath, String content,
+	public void saveMeasurementFileInThread(final String filePath,
+			final MyParserInterface parser, final boolean isFilePathAbsolute,
+			final boolean showConfirm) {
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				saveMeasurementFile(
+					filePath,
+					parser,
+					isFilePathAbsolute,
+					showConfirm);
+			}
+		}).start();
+	}
+
+	public File saveMeasurementFile(String filePath, MyParserInterface parser,
 			boolean isFilePathAbsolute, boolean showConfirm) {
 		String root = filePath;
 		if (!isFilePathAbsolute) {
@@ -50,56 +72,75 @@ public class FileManager {
 		File file = new File(root);
 		if (file.exists()) {
 			if (showConfirm) {
-				Toast.makeText(
-					dataHandlerActivity,
-					dataHandlerActivity
-							.getString(R.string.info_file_already_existing),
-					Toast.LENGTH_SHORT).show();
+				dataHandlerActivity.runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						Toast
+								.makeText(
+									dataHandlerActivity,
+									dataHandlerActivity
+											.getString(R.string.info_file_already_existing),
+									Toast.LENGTH_SHORT).show();
+					}
+				});
 			}
 			return null;
 		} else {
+			abortSaveProgress = false;
 			PrintWriter writer = null;
+			DialogManager.showProgressDialog(
+				dataHandlerActivity,
+				dataHandlerActivity.getString(R.string.save_progress),
+				dataHandlerActivity.getString(R.string.dataset_saved),
+				parser.getSize(),
+				this);
 			try {
 				writer = new PrintWriter(file);
-				writer.write(content);
-				writer.flush();
-				if (showConfirm) {
-					Toast
-							.makeText(
-								dataHandlerActivity,
-								dataHandlerActivity
-										.getString(R.string.info_save_action_successful),
-								Toast.LENGTH_SHORT).show();
+				while (parser.hasNext() && !abortSaveProgress) {
+					writer.write(parser.getNext());
+					DialogManager
+							.setCurrentDataset(parser.getCurrentPosition());
+					writer.flush();
 				}
 				writer.close();
+				if (abortSaveProgress) {
+					DialogManager.setCurrentState(DialogManager.STATE_ABORTED);
+				} else {
+					DialogManager.setCurrentState(DialogManager.STATE_FINISHED);
+				}
 				dataHandlerActivity.sendBroadcast(new Intent(
 						Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri
-								.fromFile(file))); // makes data visible threw
+								.fromFile(file))); // makes data visible
+												   // threw
 												   // mtp
 				return file;
 			} catch (FileNotFoundException e) {
 				Log.e(TAG, e.getMessage());
 			}
 		}
-		if (showConfirm) {
-			Toast.makeText(
-				dataHandlerActivity,
-				dataHandlerActivity
-						.getString(R.string.info_save_action_unsuccessful),
-				Toast.LENGTH_SHORT).show();
-		}
+		DialogManager.setCurrentState(DialogManager.STATE_ABORTED);
 		return null;
 	}
 
-	public boolean saveMeasurement(String relativeFilePath, String content) {
+	public void abortSaveProgress() {
+		abortSaveProgress = true;
+	}
+
+	public void saveMeasurement(Measurement measurement, String fileName) {
 		String root = rootDir + "/" + DIR_NAME;
+		String relativeFilePath = measurement.getTitle() + "/" + fileName
+				+ ".csv";
 		File dirs = new File(root
 				+ "/"
 				+ relativeFilePath.substring(
 					0,
 					relativeFilePath.lastIndexOf("/")));
 		dirs.mkdirs();
-		return saveAppFile(root + "/" + relativeFilePath, content, true, true) != null;
+		saveMeasurementFileInThread(
+			root + "/" + relativeFilePath,
+			new MeasurementParser(measurement),
+			true,
+			true);
 	}
 
 	public FileController getFileController() {

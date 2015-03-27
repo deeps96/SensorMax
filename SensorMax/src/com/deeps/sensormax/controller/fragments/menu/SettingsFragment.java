@@ -55,6 +55,22 @@ public class SettingsFragment extends SuperFragment {
 		initShowSummaryAtEndCheckBox();
 		initMaxGraphViewShowTimeEditText();
 		initLivestreamSettingsButton();
+		initRecordWholeAudioSpectrumCheckBox();
+	}
+
+	private void initRecordWholeAudioSpectrumCheckBox() {
+		CheckBox recordWholeAudioSpectrumCheckBox = (CheckBox) view
+				.findViewById(R.id.recordWholeAudioSpectrumCheckBox);
+		recordWholeAudioSpectrumCheckBox.setChecked(myConfig
+				.isRecordWholeAudioSpectrum());
+		recordWholeAudioSpectrumCheckBox
+				.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView,
+							boolean isChecked) {
+						myConfig.setRecordWholeAudioSpectrum(isChecked);
+					}
+				});
 	}
 
 	private void initLivestreamSettingsButton() {
