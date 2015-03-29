@@ -18,9 +18,9 @@ import android.widget.Toast;
 import com.deeps.sensormax.R;
 import com.deeps.sensormax.controller.FileController;
 import com.deeps.sensormax.model.activities.DataHandlerActivity;
+import com.deeps.sensormax.model.interfaces.MyParserInterface;
 import com.deeps.sensormax.model.measurement.Measurement;
 import com.deeps.sensormax.model.measurement.MeasurementParser;
-import com.deeps.sensormax.model.measurement.MyParserInterface;
 import com.deeps.sensormax.view.DialogManager;
 
 /**

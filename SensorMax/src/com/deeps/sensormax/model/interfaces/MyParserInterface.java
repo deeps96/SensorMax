@@ -1,4 +1,4 @@
-package com.deeps.sensormax.model.measurement;
+package com.deeps.sensormax.model.interfaces;
 
 /**
  * @author Deeps

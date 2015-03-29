@@ -250,6 +250,7 @@
 	<string name="response_account_connection_already_set">Die Verknüpfung existiert bereits.</string>
 	<string name="response_account_connection_created">Die Verknüpfung wurde erstellt.</string>
 	<string name="response_account_connection_internal_server_error">Der Server konnte keine Verknüpfung herstellen.</string>
+	<string name="response_account_connection_server_not_found">Server konnte nicht gefunden werden.</string>
 	<string name="response_account_connection_wrong_password">Falsches Passwort!</string>
 	<string name="response_account_and_connection_created">Der Account und die Verknüpfung wurden erstellt.</string>
 	<string name="no_internet_connection">Keine Internetverbindung verfügbar!</string>
@@ -260,5 +261,6 @@
 	<string name="save_aborted">Speichervorgang abgebrochen.</string>
 	<string name="save_finished">Speichervorgang abgeschlossen.</string>
 	<string name="record_audio_spectrum">Zeichne zusätzlich zu DB und Frequenz Audiospektrum auf.</string>
+	<string name="unexpected_response_code">Unerwarteter Response-Code:</string>
     
 </resources>

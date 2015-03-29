@@ -1,5 +1,7 @@
 package com.deeps.sensormax.model.measurement;
 
+import com.deeps.sensormax.model.interfaces.MyParserInterface;
+
 /**
  * @author Deeps
  */

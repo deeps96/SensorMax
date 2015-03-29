@@ -59,19 +59,19 @@ public class LiveStreamManager implements Runnable {
 		while (true) {
 			Task currentTask = tasks.peek();
 			if (currentTask != null) {
-				switch (sendPostRequest(currentTask.getPostBody())) {
-					case HttpStatus.SC_OK:
-						tasks.poll();
+				int responseCode = sendPostRequest(currentTask.getPostBody());
+				if (responseCode > 0) {
+					tasks.poll();
+					if (responseCode == HttpStatus.SC_OK) {
 						if (currentTask.getType() == Task.TYPE_SUMMARY_LAST) {
 							showToast(dataHandlerActivity
 									.getString(R.string.overview_sent));
 						}
-						break;
-					case -1:
-						showToast(dataHandlerActivity
-								.getString(R.string.no_internet_connection_retry_in_delay));
-						delay = true;
-						break;
+					}
+				} else {
+					showToast(dataHandlerActivity
+							.getString(R.string.no_internet_connection_retry_in_delay));
+					delay = true;
 				}
 			}
 			try {
@@ -129,6 +129,10 @@ public class LiveStreamManager implements Runnable {
 					case HttpStatus.SC_CREATED:
 						response = dataHandlerActivity
 								.getString(R.string.response_account_and_connection_created);
+						break;
+					case HttpStatus.SC_NOT_FOUND:
+						response = dataHandlerActivity
+								.getString(R.string.response_account_connection_server_not_found);
 						break;
 					case -1:
 						response = dataHandlerActivity

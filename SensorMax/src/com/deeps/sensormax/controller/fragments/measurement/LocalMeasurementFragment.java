@@ -78,13 +78,6 @@ public abstract class LocalMeasurementFragment extends SuperFragment implements
 		initEnableLiveStreamButton();
 	}
 
-	@Override
-	public void onStop() {
-		((ToggleButton) view.findViewById(R.id.enableLiveStreamToggleButton))
-				.setChecked(false);
-		super.onStop();
-	}
-
 	private void initEnableLiveStreamButton() {
 		ToggleButton enableLiveStreamButton = (ToggleButton) view
 				.findViewById(R.id.enableLiveStreamToggleButton);
@@ -138,6 +131,9 @@ public abstract class LocalMeasurementFragment extends SuperFragment implements
 		if (isGraphInFullscreenMode) {
 			triggerFullscreenMode();
 		} else {
+			((ToggleButton) view
+					.findViewById(R.id.enableLiveStreamToggleButton))
+					.setChecked(false);
 			dataHandlerActivity.getGuiManager().changeContentFragment(
 				dataHandlerActivity.getMyFragmentManager()
 						.getSensorOverviewFragment(),
