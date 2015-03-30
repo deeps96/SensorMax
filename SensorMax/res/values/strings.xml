@@ -134,7 +134,7 @@
     <string name="procent">%</string>
     <string name="duration_in_s">Dauer in sek</string>
     <string name="infotext_acceleration">
-        Misst die Beschleunigung in m/s^2 , welche auf jede der drei 
+        Misst die Beschleunigung in m/s² , welche auf jede der drei 
         physikalischen Achsen (x, y, z) wirkt. (Einschließlich der 
         Fallbeschleunigung)&lt;br /&gt;
         Deshalb sollte, wenn das Handy flach auf einem Tisch liegt, die Werte 
@@ -145,7 +145,7 @@
     <string name="infotext_ambient_temperature">
         Misst die Umgebungstemperatur im Raum in °C.</string>
     <string name="infotext_gravity">
-        Misst die Fallbeschleunigung in m/s^2 , welche auf jede der drei 
+        Misst die Fallbeschleunigung in m/s² , welche auf jede der drei 
         physikalischen Achsen (x, y, z) wirkt.&lt;br /&gt;
         Wenn das Gerät ruhig auf einem Tisch liegt, sollten die Werte mit 
         denen des Beschleunigungsensors übereinstimmen.&lt;br /&gt;
@@ -165,7 +165,7 @@
         Dieser Sensor befindet sich normalerweise neben der Hörmuschel bzw. 
         neben der Frontkamera.</string>
 	<string name="infotext_linear_acceleration">
-        Misst die Beschleunigung in m/s^2 , welche auf jede der drei 
+        Misst die Beschleunigung in m/s² , welche auf jede der drei 
         physikalischen Achsen (x, y, z) wirkt (ohne der Fallbeschleunigung).&lt;br /&gt;
         Wenn das Gerät ruhig auf einem Tisch liegt, so sollten alle Werte den 
         Wert 0 m/s² annehmen.&lt;br /&gt;
